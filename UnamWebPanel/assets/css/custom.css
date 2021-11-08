@@ -1,0 +1,202 @@
+/**
+ *
+ * You can write your CSS code here, DO NOT touch the default JavaScript file
+ * because it will make it harder for you to update.
+ * 
+ */
+
+/*# sourceMappingURL=custom.css.map */
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('/assets/fonts/SourceSansPro-Regular.ttf') format('tff');
+}
+
+.custom-tables .dataTables_length, .custom-tables .dt-buttons{
+     float: left;
+     margin-right: 10px;
+}
+
+.custom-tables tbody{
+    /* word-break: break-word; */
+}
+
+.text-status-red{
+    color: #c82333;
+}
+
+.text-status-yellow{
+    color: #ffc107;
+}
+
+.text-status-green{
+    color: #28a745;
+}
+
+.dataTable{
+    width: 100% !important;
+}
+
+.select2 {
+    width:100% !important;
+}
+
+.margin-top{
+    margin-top:5px;
+}
+
+/** START LOADING SPINNER **/
+.lds-ellipsis {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: auto;
+}
+.lds-ellipsis div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+    left: 8px;
+    animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+    left: 8px;
+    animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+    left: 32px;
+    animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+    left: 56px;
+    animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes lds-ellipsis3 {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+@keyframes lds-ellipsis2 {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(24px, 0);
+    }
+}
+/** END LOADING SPINNER **/
+
+.display-inline{
+    display: inline;
+}
+
+.external-page {
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: #e9ecef;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: 100vh;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.external-page-box {
+    width: 320px;
+}
+
+@media (max-width: 576px) {
+    .external-page{
+        margin-top: .5rem;
+        width: 90%;
+    }
+}
+
+.external-page .card{
+    margin-bottom: 0;
+}
+
+.external-page .card-body {
+    background-color: #fff;
+    border-top: 0;
+    color: #666;
+    padding: 20px;
+}
+
+.external-page .card-body .input-group .form-control {
+    border-right: 0;
+}
+
+.external-page .card-body .input-group .form-control:focus {
+    box-shadow: none;
+}
+
+.external-page .card-body .input-group .form-control:focus ~ .input-group-prepend .input-group-text,
+.external-page .card-body .input-group .form-control:focus ~ .input-group-append .input-group-text {
+    border-color: #80bdff;
+}
+
+.external-page .card-body .input-group .form-control.is-valid:focus {
+    box-shadow: none;
+}
+
+.external-page .card-body .input-group .form-control.is-valid ~ .input-group-prepend .input-group-text,
+.external-page .card-body .input-group .form-control.is-valid ~ .input-group-append .input-group-text {
+    border-color: #28a745;
+}
+
+.external-page .card-body .input-group .form-control.is-invalid:focus {
+    box-shadow: none;
+}
+
+.external-page .card-body .input-group .form-control.is-invalid ~ .input-group-append .input-group-text {
+    border-color: #dc3545;
+}
+
+.external-page .card-body .input-group .input-group-text {
+    background-color: transparent;
+    border-bottom-right-radius: 0.25rem;
+    border-left: 0;
+    border-top-right-radius: 0.25rem;
+    color: #777;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.external-page-msg {
+    margin: 0;
+    padding: 0 20px 20px;
+    text-align: center;
+}
+
+.dark-mode .external-page .card-body {
+    background-color: #343a40;
+    border-color: #6c757d;
+    color: #fff;
+}
+
+.dark-mode .external-page-logo a {
+    color: #fff;
+}
