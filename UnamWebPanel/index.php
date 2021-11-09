@@ -28,7 +28,7 @@ $loadurl = $page ?: 'miners';
     </nav>
 
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <a href="<?php echo $config['baseURL']; ?>" class="brand-link">
+        <a href="#" class="brand-link">
             <img src="assets/img/unam.png" alt="Unam Sanctam" class="brand-image">
             <span class="brand-text font-weight-light">Unam Web Panel</span>
         </a>
