@@ -1,6 +1,6 @@
 <img src="https://github.com/UnamSanctam/UnamWebPanel/blob/master/UnamWebPanel.png?raw=true">
 
-# UnamWebPanel v1.1
+# UnamWebPanel v1.2
 
 A web panel currently used to optionally monitor and manage the [SilentCryptoMiner](https://github.com/UnamSanctam/SilentCryptoMiner). Might support any other projects I release in the future as well.
 
@@ -28,6 +28,9 @@ You can find the wiki [here](https://github.com/UnamSanctam/SilentCryptoMiner/wi
 
 ## Changelog
 
+### v1.2 (09/11/2021)
+* Added GPU and CPU to the miners datatable
+* Added GPU and CPU to the database
 ### v1.1 (09/11/2021)
 * Added unamwebpanel.db into the .htaccess and web.config files as a forbidden path to secure the SQLite database on Apache and IIS servers without having to place the database in a non-public folder
 * Removed recommendation to move the database file to a non-public folder due to the added protection files for Apache and IIS
