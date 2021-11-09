@@ -3,7 +3,7 @@
 require_once 'assets/php/templates.php';
 
 if($loggedin){
-    header("Location:/".$config['url_pages']);
+    header("Location: index.php");
 }
 
 echo templateExternalPage("Unam Web Panel &mdash; {$larr['Login']}",

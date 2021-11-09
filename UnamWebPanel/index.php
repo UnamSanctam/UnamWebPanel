@@ -28,7 +28,7 @@ $loadurl = $page ?: 'miners';
     </nav>
 
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <a href="#" class="brand-link">
+        <a href="index.php" class="brand-link">
             <img src="assets/img/unam.png" alt="Unam Sanctam" class="brand-image">
             <span class="brand-text font-weight-light">Unam Web Panel</span>
         </a>
@@ -114,12 +114,12 @@ $(document).ready(function()
     let scope = $(this);
     loadPageContentAjax(this, 'GET', scope.data('page'), { id: scope.val() });
 }).on('select2:select', '.nav-lang', function(e){
-    unam_jsonAjax('POST', '<?php echo $config['url_ajaxsitewide']; ?>', {method: 'lang-change', newlangID: e.params.data.id}, function(data){
+    unam_jsonAjax('POST', 'api/ajax-sitewide.php', {method: 'lang-change', newlangID: e.params.data.id}, function(data){
         location.reload();
     }, function(error){ errorMessage(error); });
 }).on('change', '.select-miner-config', function(e){
     let scope = $(this);
-    unam_jsonAjax('POST', '<?php echo $config['url_ajaxactions']; ?>', Object.assign({}, {method: scope.data('method'), index: scope.data('index'), config: scope.val()}, scope.data('extradata') || {} ), function(data){
+    unam_jsonAjax('POST', 'api/ajax-actions.php', Object.assign({}, {method: scope.data('method'), index: scope.data('index'), config: scope.val()}, scope.data('extradata') || {} ), function(data){
         if(data.successmsg){
             successMessage(data.successmsg);
         }
@@ -138,7 +138,7 @@ function datatableTemplate(table, _data={}, minmode=false, _columnDefs=[]){
         sScrollX: "100%",
         <?php if($langID != 'en' && file_exists(__DIR__."/lang/datatables/{$langID}.json")){ echo "language: ".file_get_contents(__DIR__."/lang/datatables/{$langID}.json").","; } ?>
         ajax: {
-            url: "<?php echo $config['url_customtable']; ?>",
+            url: "api/custom-table.php",
             type: "POST",
             data: Object.assign({}, {method: 'datatable-get', tableid: table, cid: paramID}, _data)
         },
@@ -208,7 +208,7 @@ $(document).on('submit', ".form-submit", function(e){
     function ajaxAction(scope){
         let indexval = (scope.data('index') ? scope.data('index') : scope.closest('tr').find('td').html());
         let extradata = Object.assign({}, (scope.hasClass('ajax-action-checkbox') ? {checked: scope.is(':checked') ? 1 : 0} : {}), scope.data('extradata'));
-        unam_jsonAjax('POST', '<?php echo $config['url_ajaxactions']; ?>', Object.assign({}, {
+        unam_jsonAjax('POST', 'api/ajax-actions.php', Object.assign({}, {
             method: scope.data('method'),
             index: indexval
         }, extradata), function (data) {
@@ -261,7 +261,7 @@ function loadPageContentAjax(scope, _type, _url, _data={}, _container='.ajaxcont
     jQuery.ajax(
       {
           type: _type,
-          url: '<?php echo $config['url_pageloader']; ?>',
+          url: 'page-loader.php',
           dataType: 'html',
           headers: {
               'UNAM-Request-Type': 'AJAX'
