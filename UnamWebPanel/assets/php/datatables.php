@@ -67,6 +67,10 @@
                         'db_column'=>'computername',
                         'display'=>$larr['computer_name']
                     ],
+                    'type'=>[
+                        'db_column'=>'type',
+                        'display'=>$larr['Type']
+                    ],
                     'remoteURL'=>[
                         'db_column'=>'remoteURL',
                         'display'=>"{$larr['Remote']} {$larr['URL']}"

@@ -89,5 +89,7 @@ $langarr = [
     'cannot_remove_default'=>['en' => 'Cannot remove the default value.', 'sv' => 'Det går inte att ta bort standardvärdet'],
     'None'=>['en' => 'None', 'sv' => 'Ingen'],
     'Stealth'=>['en' => 'Stealth', 'sv' => 'Stealth'],
-    'Offline'=>['en' => 'Offline', 'sv' => 'Offline']
+    'Offline'=>['en' => 'Offline', 'sv' => 'Offline'],
+    'Idle'=>['en' => 'Idle', 'sv' => 'Inaktiv'],
+    'Type'=>['en' => 'Type', 'sv' => 'Typ']
 ];

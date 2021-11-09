@@ -116,8 +116,7 @@ function unamtDatatable($id, $columnarray, $options=[]){
         }
         return $default;
     }
-    return <<<HTMLCODE
-                <div class='table-responsive hook-datatable container-fluid {$options['classes']}' data-tableid='{$id}' data-editmethod='{$options["editmethod"]}' data-editcolumns='{$cf(safeEncodeJSON($options["edit_columns"]))}' data-editformat='{$cf(safeEncodeJSON($options["edit_format"]))}' data-minmode='{$options["minmode"]}' data-filters='{$cf(json_encode(['filters'=>[$options['filters']]]))}' data-extradata='{$options["extradata"]}' {$options['extra']}>
+    return "<div class='table-responsive hook-datatable container-fluid {$options['classes']}' data-tableid='{$id}' data-editmethod='{$options["editmethod"]}' data-editcolumns='{$cf(safeEncodeJSON($options["edit_columns"]))}' data-editformat='{$cf(safeEncodeJSON($options["edit_format"]))}' data-minmode='{$options["minmode"]}' data-filters='{$cf(json_encode(['filters'=>[$options['filters']]]))}' data-extradata='{$options["extradata"]}' {$options['extra']}>
                     <table class='table table-bordered table-hover' id='{$id}'>
                         <thead>
                         <tr>
@@ -125,8 +124,7 @@ function unamtDatatable($id, $columnarray, $options=[]){
                         </tr>
                         </thead>
                     </table>
-                </div>
-            HTMLCODE;
+                </div>";
 }
 
 function unamtCard($cardsize, $headercontent, $bodyclass, $content, $options=[]){
@@ -178,7 +176,7 @@ function unamtMinerStatus($status){
         case 2:
             return "<span class='text-status-green'>{$larr['Active']}</span>";
         case 3:
-            return "<span class='text-status-green>{$larr['Active']} ({$larr['Idle']}))</span>";
+            return "<span class='text-status-green'>{$larr['Active']} ({$larr['Idle']})</span>";
         case 4:
             return "<span class='text-status-yellow'>{$larr['Paused']} ({$larr['Stealth']})</span>";
         case 5:

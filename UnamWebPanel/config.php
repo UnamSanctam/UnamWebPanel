@@ -4,13 +4,16 @@ $config = [];
 
 $config['password'] = 'UnamSanctam';
 
-$config['db_file'] = "protected_path_to_unamwebpanel.db";
 /*
- * Example:
- * $config['db_file'] = dirname(__FILE__, 1)."/unamwebpanel.db";
- * Will use the unamwebpanel.db one folder back from where
- * config.php is located, DB should be placed outside public_html
+ * If your web server uses Apache then there is no need to
+ * change the db location since the .htaccess file will 
+ * protect the database file from being accessed.
+ * 
+ * You can test if you are vulnerable by trying to access
+ * WEBSITEURL/unamwebpanel.db (replace WEBSITEURL with your URL),
+ * if it returns a 403 Forbidden error then you are protected
  */
+ $config['db_file'] = dirname(__FILE__)."/unamwebpanel.db";
 
 $config['url_pages'] = 'index.php';
 $config['url_login'] = 'login.php';
@@ -27,6 +30,6 @@ $config['api_minreportime'] = 50;
 
 $config['languages'] = ['en', 'sv'];
 
-$config['unam_version'] = "1.0";
+$config['unam_version'] = "1.1";
 
 global $config;
