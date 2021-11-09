@@ -71,6 +71,14 @@
                         'db_column'=>'type',
                         'display'=>$larr['Type']
                     ],
+                    'gpu'=>[
+                        'db_column'=>'gpu',
+                        'display'=>'GPU'
+                    ],
+                    'cpu'=>[
+                        'db_column'=>'cpu',
+                        'display'=>'CPU'
+                    ],
                     'remoteURL'=>[
                         'db_column'=>'remoteURL',
                         'display'=>"{$larr['Remote']} {$larr['URL']}"

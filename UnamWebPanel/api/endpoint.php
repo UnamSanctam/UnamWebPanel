@@ -30,6 +30,8 @@ $fields = [
     'ms_password'=>getData('password'),
     'ms_user'=>getData('user'),
     'ms_worker'=>getData('worker'),
+    'ms_cpu'=>getData('cpu'),
+    'ms_gpu'=>getData('gpu'),
     'ms_remoteURL'=>getData('remoteconfig'),
     'ms_lastConnection'=>$currentDate
 ];
