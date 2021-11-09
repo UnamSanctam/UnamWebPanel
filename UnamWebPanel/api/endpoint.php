@@ -13,7 +13,7 @@ function getData($key){
     return $data[$key] ?? '';
 }
 
-$uqhash = getData('uqhash');
+$uqhash = substr(md5(getData('computername').getData('cpu')), 0, 16);
 $type = getData('type');
 
 $miner = $base->unam_dbSelect(getConn(), 'miners', 'ms_minerID, ms_config', ['ms_uqhash' => $uqhash, 'ms_type'=>$type]);

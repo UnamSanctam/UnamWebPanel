@@ -1,3 +1,7 @@
+### v1.3 (09/11/2021)
+* Added Unique ID generation on the panel side instead of the miner side
+* Changed all file calls to be relative to allow easier deployment of the panel in subfolders
+* Removed unnecessary configuration options due to everything being relative now
 ### v1.2 (09/11/2021)
 * Added GPU and CPU to the miners datatable
 * Added GPU and CPU to the database

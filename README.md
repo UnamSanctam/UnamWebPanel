@@ -1,6 +1,6 @@
 <img src="https://github.com/UnamSanctam/UnamWebPanel/blob/master/UnamWebPanel.png?raw=true">
 
-# UnamWebPanel v1.2
+# UnamWebPanel v1.3
 
 A web panel currently used to optionally monitor and manage the [SilentCryptoMiner](https://github.com/UnamSanctam/SilentCryptoMiner). Might support any other projects I release in the future as well.
 
@@ -28,6 +28,10 @@ You can find the wiki [here](https://github.com/UnamSanctam/SilentCryptoMiner/wi
 
 ## Changelog
 
+### v1.3 (09/11/2021)
+* Added Unique ID generation on the panel side instead of the miner side
+* Changed all file calls to be relative to allow easier deployment of the panel in subfolders
+* Removed unnecessary configuration options due to everything being relative now
 ### v1.2 (09/11/2021)
 * Added GPU and CPU to the miners datatable
 * Added GPU and CPU to the database

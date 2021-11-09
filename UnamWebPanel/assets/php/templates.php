@@ -3,40 +3,42 @@
 require_once 'session-header.php';
 
 function generalJSIncludes(){
-    return "<script src='/assets/modules/jquery/jquery.min.js'></script>
-            <script src='/assets/modules/jquery-confirm/jquery-confirm.js'></script>
-            <script src='/assets/modules/datatables/jquery.dataTables.min.js'></script>
-            <script src='/assets/modules/datatables-bs4/js/dataTables.bootstrap4.min.js'></script>
-            <script src='/assets/modules/datatables-responsive/js/dataTables.responsive.min.js'></script>
-            <script src='/assets/modules/datatables-responsive/js/responsive.bootstrap4.min.js'></script>
-            <script src='/assets/modules/datatables-buttons/js/dataTables.buttons.min.js'></script>
-            <script src='/assets/modules/datatables-buttons/js/buttons.bootstrap4.min.js'></script>
-            <script src='/assets/modules/datatables-buttons/js/buttons.html5.min.js'></script>
-            <script src='/assets/modules/datatables-buttons/js/buttons.print.min.js'></script>
-            <script src='/assets/modules/datatables-buttons/js/buttons.colVis.min.js'></script>
-            <script src='/assets/modules/select2/js/select2.min.js'></script>
-            <script src='/assets/modules/sweetalert2/sweetalert2.min.js'></script>
-            <script src='/assets/modules/izitoast/js/iziToast.min.js'></script>
-            <script src='/assets/modules/bootstrap/js/bootstrap.bundle.min.js'></script>
-            <script src='/assets/modules/overlayScrollbars/js/jquery.overlayScrollbars.min.js'></script>
-            <script src='/assets/modules/jquery-mousewheel/jquery.mousewheel.js'></script>
-            <script src='/assets/modules/raphael/raphael.min.js'></script>
-            <script src='/assets/js/adminlte.js'></script>
-            <script src='/__UNAM_LIB/unam_lib.js'></script>";
+    global $config;
+    return "<script src='assets/modules/jquery/jquery.min.js'></script>
+            <script src='assets/modules/jquery-confirm/jquery-confirm.js'></script>
+            <script src='assets/modules/datatables/jquery.dataTables.min.js'></script>
+            <script src='assets/modules/datatables-bs4/js/dataTables.bootstrap4.min.js'></script>
+            <script src='assets/modules/datatables-responsive/js/dataTables.responsive.min.js'></script>
+            <script src='assets/modules/datatables-responsive/js/responsive.bootstrap4.min.js'></script>
+            <script src='assets/modules/datatables-buttons/js/dataTables.buttons.min.js'></script>
+            <script src='assets/modules/datatables-buttons/js/buttons.bootstrap4.min.js'></script>
+            <script src='assets/modules/datatables-buttons/js/buttons.html5.min.js'></script>
+            <script src='assets/modules/datatables-buttons/js/buttons.print.min.js'></script>
+            <script src='assets/modules/datatables-buttons/js/buttons.colVis.min.js'></script>
+            <script src='assets/modules/select2/js/select2.min.js'></script>
+            <script src='assets/modules/sweetalert2/sweetalert2.min.js'></script>
+            <script src='assets/modules/izitoast/js/iziToast.min.js'></script>
+            <script src='assets/modules/bootstrap/js/bootstrap.bundle.min.js'></script>
+            <script src='assets/modules/overlayScrollbars/js/jquery.overlayScrollbars.min.js'></script>
+            <script src='assets/modules/jquery-mousewheel/jquery.mousewheel.js'></script>
+            <script src='assets/modules/raphael/raphael.min.js'></script>
+            <script src='assets/js/adminlte.js'></script>
+            <script src='__UNAM_LIB/unam_lib.js'></script>";
 }
 
 function generalCSSIncludes(){
-    return "<link rel='stylesheet' href='/assets/modules/fontawesome-free/css/all.min.css'>
-            <link rel='stylesheet' href='/assets/modules/izitoast/css/iziToast.css'>
-            <link rel='stylesheet' href='/assets/modules/jquery-confirm/jquery-confirm.css'>
-            <link rel='stylesheet' href='/assets/modules/select2/css/select2.min.css'>
-            <link rel='stylesheet' href='/assets/modules/sweetalert2/sweetalert2.min.css'>
-            <link rel='stylesheet' href='/assets/modules/overlayScrollbars/css/OverlayScrollbars.min.css'>
-            <link rel='stylesheet' href='/assets/modules/datatables-bs4/css/dataTables.bootstrap4.min.css'>
-            <link rel='stylesheet' href='/assets/modules/datatables-responsive/css/responsive.bootstrap4.min.css'>
-            <link rel='stylesheet' href='/assets/modules/datatables-buttons/css/buttons.bootstrap4.min.css'>
-            <link rel='stylesheet' href='/assets/css/adminlte.min.css'>
-            <link rel='stylesheet' href='/assets/css/custom.css'>";
+    global $config;
+    return "<link rel='stylesheet' href='assets/modules/fontawesome-free/css/all.min.css'>
+            <link rel='stylesheet' href='assets/modules/izitoast/css/iziToast.css'>
+            <link rel='stylesheet' href='assets/modules/jquery-confirm/jquery-confirm.css'>
+            <link rel='stylesheet' href='assets/modules/select2/css/select2.min.css'>
+            <link rel='stylesheet' href='assets/modules/sweetalert2/sweetalert2.min.css'>
+            <link rel='stylesheet' href='assets/modules/overlayScrollbars/css/OverlayScrollbars.min.css'>
+            <link rel='stylesheet' href='assets/modules/datatables-bs4/css/dataTables.bootstrap4.min.css'>
+            <link rel='stylesheet' href='assets/modules/datatables-responsive/css/responsive.bootstrap4.min.css'>
+            <link rel='stylesheet' href='assets/modules/datatables-buttons/css/buttons.bootstrap4.min.css'>
+            <link rel='stylesheet' href='assets/css/adminlte.min.css'>
+            <link rel='stylesheet' href='assets/css/custom.css'>";
 }
 
 function unamtFormGroup($content, $options=[]){
@@ -225,7 +227,7 @@ function templateExternalPage($title, $content, $options=[]){
 <script>
 $('.unamLogin').on('submit', function(e){
     e.preventDefault();
-    unam_jsonAjax('POST', '/{$config['url_authajax']}', $(this).serialize(), function(data){
+    unam_jsonAjax('POST', 'auth-ajax.php', $(this).serialize(), function(data){
         location.reload();
     }, function(error){ iziToast.error({ title: 'Error', message: error, position: 'topRight' });
     });

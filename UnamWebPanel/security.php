@@ -8,7 +8,7 @@ function logoutFunction(){
     if(isset($_SERVER['HTTP_UNAM_REQUEST_TYPE']) && $_SERVER['HTTP_UNAM_REQUEST_TYPE'] == 'AJAX'){
         echo json_encode(['sessionExpired'=>1]);
     }else{
-        header("Location:/".$config['url_login']);
+        header("Location: login.php");
     }
     die();
 }
