@@ -108,6 +108,15 @@ function unamtHidden($name, $value){
     return "<input type='hidden' name='{$name}' value='{$value}'>";
 }
 
+function unamtToggleSwitch($checked, $options=[]){
+    global $cf;
+    $options = array_merge(['classes'=>''], $options);
+    return "<label class='round-switch'>
+              <input type='checkbox' class='{$options['classes']}' {$cf($checked ? 'checked' : '')}>
+              <span class='round-slider'></span>
+            </label>";
+}
+
 function unamtDatatable($id, $columnarray, $options=[]){
     global $cf;
     $options = array_merge(['editmethod'=>'', 'edit_columns'=>'', 'edit_format'=>'', 'minmode'=>'false', 'extradata'=>'{}', 'filters'=>'{}', 'classes'=>'', 'extra'=>''], $options);
@@ -182,6 +191,8 @@ function unamtMinerStatus($status){
         case 4:
             return "<span class='text-status-yellow'>{$larr['Paused']} ({$larr['Stealth']})</span>";
         case 5:
+            return "<span class='text-status-yellow'>{$larr['not_enough_free_vram']}</span>";
+        case 6:
             return "<span class='text-status-red'>{$larr['Offline']}</span>";
         default:
             return "<span class='text-status-red'>{$larr['Unknown']}</span>";
@@ -195,6 +206,11 @@ function unamtFormatHashrate($num)
         $num /= 1000;
     }
     return round($num, 1)." {$units[$i]}";
+}
+
+function templateRefreshDatatables(){
+    global $larr;
+    return $larr['auto_refresh'].' '.unamtToggleSwitch(false, ['classes'=>'refresh-datatables']);
 }
 
 function templateLanguageSelect(){
@@ -242,7 +258,7 @@ $('.unamLogin').on('submit', function(e){
 }
 
 function templateDatatableX($datatable, $options=[]){
-    global $larr;
+    global $larr, $cf;
     require_once 'datatables.php';
     $table = &$datatables['tables'][$datatable];
     $etable = $table;
@@ -258,7 +274,7 @@ function templateDatatableX($datatable, $options=[]){
         }
         $icount++;
     }
-    return unamtCard(12, $etable['html_header'], 'custom-tables',
+    return unamtCard(12, $etable['html_header']." <div class='card-tools'>{$cf(templateRefreshDatatables())}</div>", 'custom-tables',
         unamtDatatable($datatable, array_column($etable['columns'], 'display'), array_merge(['edit_columns'=>$tabledata['edit_columns'] ?? '', 'edit_format'=>$tabledata['edit_format'] ?? ''], $options))
     );
 }

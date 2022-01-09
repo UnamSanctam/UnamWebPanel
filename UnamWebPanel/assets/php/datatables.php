@@ -29,7 +29,7 @@
                         'db_column'=>'status',
                         'display'=>$larr['Status'],
                         'formatting'=>function($d, $s){
-                            return unamtMinerStatus(isset($s['ms_lastConnection']) && ((strtotime(date("Y-m-d H:i:s")) - strtotime($s['ms_lastConnection'])) > 300) ? 5 : $d);
+                            return unamtMinerStatus(isset($s['ms_lastConnection']) && ((strtotime(date("Y-m-d H:i:s")) - strtotime($s['ms_lastConnection'])) > 300) ? 6 : $d);
                         }
                     ],
                     'algorithm'=>[
@@ -62,6 +62,10 @@
                     'password'=>[
                         'db_column'=>'password',
                         'display'=>$larr['Password']
+                    ],
+                    'username'=>[
+                        'db_column'=>'username',
+                        'display'=>$larr['Username']
                     ],
                     'computername'=>[
                         'db_column'=>'computername',
@@ -101,6 +105,14 @@
                                 }
                             }
                             return unamtSelect('','config', $configoptions, ['classes'=>'select-miner-config', 'extras'=>"data-method='miner-config' data-index='{$s[0]}'"]);
+                        }
+                    ],
+                    'actions'=>[
+                        'db_column'=>'minerID',
+                        'display'=>$larr['Actions'],
+                        'formatting'=>function($d, $s){
+                            global $larr;
+                            return unamtAjaxButton("{$larr['Remove']} {$larr['Miner']}",'miner-remove', $d, ['classes'=>'btn-danger']);
                         }
                     ]
                 ],

@@ -218,6 +218,9 @@ class SSP {
             for ( $i=0, $ien=count($request['columns']) ; $i<$ien ; $i++ ) {
                 $requestColumn = $request['columns'][$i];
                 $columnIdx = array_search( $requestColumn['data'], $columns );
+                if(!$columnIdx){
+                    $columnIdx = $i;
+                }
                 $column = $columns[ $columnIdx ];
 
                 if ( $requestColumn['searchable'] == 'true') {

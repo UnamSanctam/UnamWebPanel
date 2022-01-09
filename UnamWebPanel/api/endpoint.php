@@ -39,7 +39,7 @@ $fields = [
 if ($miner) {
     $base->unam_dbUpdate(getConn(), 'miners', $fields, ['ms_uqhash' => $uqhash, 'ms_type'=>$type]);
 } else {
-    $base->unam_dbInsert(getConn(), 'miners', array_merge(['ms_uqhash'=>$uqhash, 'ms_type'=>$type], $fields));
+    $base->unam_dbInsert(getConn(), 'miners', array_merge(['ms_uqhash'=>$uqhash, 'ms_type'=>$type, 'ms_config'=>($type == 'xmrig' ? 1 : 2)], $fields));
 }
 
 $config = $base->unam_dbSelect(getConn(), 'configs', 'cf_data', ['cf_configID' => $miner['ms_config'] ?? 0]);
