@@ -38,7 +38,7 @@ echo unamtSection($larr['Configurations'],
                 unamtFormGroup(unamtTextarea("{$larr['Configuration']} JSON", 'data', getConfigValue('cf_data'), ['extras'=>''])).
                 unamtRow(
                     unamtFormGroup(unamtSubmit($larr['Save']), ['classes'=>'col']).
-                    unamtFormGroup(unamtAjaxButton($larr['Remove'], 'config-remove', $configID, ['classes'=>($configID == 1 ? 'disabled ' : '').' col btn-danger ajax-action-reload']), ['classes'=>'col'])
+                    unamtFormGroup(unamtAjaxButton($larr['Remove'], 'config-remove', $configID, ['classes'=>($configID == 1 || $configID == 2 ? 'disabled ' : '').' col btn-danger ajax-action-reload']), ['classes'=>'col'])
                 )
             )
         )

@@ -91,5 +91,7 @@ $langarr = [
     'Stealth'=>['en' => 'Stealth', 'sv' => 'Stealth'],
     'Offline'=>['en' => 'Offline', 'sv' => 'Offline'],
     'Idle'=>['en' => 'Idle', 'sv' => 'Inaktiv'],
-    'Type'=>['en' => 'Type', 'sv' => 'Typ']
+    'Type'=>['en' => 'Type', 'sv' => 'Typ'],
+    'not_enough_free_vram'=>['en' => 'Not enough free VRAM', 'sv' => 'För lite ledigt VRAM'],
+    'auto_refresh'=>['en' => 'Auto Refresh', 'sv' => 'Auto Refresh']
 ];

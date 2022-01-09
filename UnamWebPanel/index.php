@@ -97,6 +97,8 @@ let lastPage = '';
 let showLoader = false;
 let datatables = [];
 
+let refreshTimer;
+
 $(document).ready(function()
 {
   loadPageContentAjax(this, 'GET', openLoadUrl, {'id': paramID});
@@ -124,6 +126,16 @@ $(document).ready(function()
             successMessage(data.successmsg);
         }
     }, function(error){ errorMessage(error); });
+}).on("click touch", '.refresh-datatables', function(e)
+{
+    if($(this).is(':checked')){
+        refreshTimer = setInterval(function(){
+            reloadDatatables();
+            console.log("reloaded");
+        },10000);
+    }else{
+        clearInterval(refreshTimer);
+    }
 });
 
 function datatableTemplate(table, _data={}, minmode=false, _columnDefs=[]){

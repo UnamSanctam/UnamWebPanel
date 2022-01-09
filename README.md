@@ -1,6 +1,6 @@
 <img src="https://github.com/UnamSanctam/UnamWebPanel/blob/master/UnamWebPanel.png?raw=true">
 
-# UnamWebPanel v1.3
+# UnamWebPanel v1.4
 
 A web panel currently used to optionally monitor and manage the [SilentCryptoMiner](https://github.com/UnamSanctam/SilentCryptoMiner). Might support any other projects I release in the future as well.
 
@@ -28,6 +28,17 @@ You can find the wiki [here](https://github.com/UnamSanctam/SilentCryptoMiner/wi
 
 ## Changelog
 
+### v1.4 (09/01/2022)
+* Added functionality to remove miners from the list
+* Added JSON validation functionality to warn when saving incorrect configurations
+* Added username display into the miner list
+* Added "Auto refresh" toggle button for automatic miner list refreshing
+* Added robots.txt file to stop search engines from indexing the web panel
+* Added directory listing block in .htaccess for better privacy
+* Added previously ignored "Logs" folder back
+* Changed "Default" configuraiton into "Default ethminer" and "Default xmrig" configurations to allow different default configurations for the two different miners
+* Fixed possible database "corruption" when null hashrates were submitted
+* Fixed broken miner searching and sorting
 ### v1.3 (09/11/2021)
 * Added Unique ID generation on the panel side instead of the miner side
 * Changed all file calls to be relative to allow easier deployment of the panel in subfolders

@@ -5,8 +5,8 @@ $config = [];
 $config['password'] = 'UnamSanctam';
 
 /*
- * If your web server uses Apache then there is no need to
- * change the db file location since the .htaccess file
+ * If your web server uses Apache or IIS then there is no need to
+ * change the db file location since the .htaccess or web.config file
  * will protect the database file from being accessed.
  * 
  * You can test if you are vulnerable by trying to access
@@ -22,6 +22,6 @@ $config['api_minreportime'] = 50;
 
 $config['languages'] = ['en', 'sv'];
 
-$config['unam_version'] = "1.3";
+$config['unam_version'] = "1.4";
 
 global $config;
