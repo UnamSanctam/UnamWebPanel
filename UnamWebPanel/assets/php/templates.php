@@ -201,6 +201,7 @@ function unamtMinerStatus($status){
 
 function unamtFormatHashrate($num)
 {
+    $num = $num ?: 0;
     $units = ['H/s', 'KH/s', 'MH/s', 'GH/s', 'TH/s', 'PH/s', 'EH/s'];
     for ($i = 0; $num >= 1000; $i++) {
         $num /= 1000;
