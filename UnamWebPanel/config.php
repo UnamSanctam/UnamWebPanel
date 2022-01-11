@@ -22,6 +22,6 @@ $config['api_minreportime'] = 50;
 
 $config['languages'] = ['en', 'sv'];
 
-$config['unam_version'] = "1.4";
+$config['unam_version'] = "1.4.1";
 
 global $config;
