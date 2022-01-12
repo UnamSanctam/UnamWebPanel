@@ -30,7 +30,7 @@ $langarr = [
     'more_info'=>['en' => 'More Info', 'sv' => 'Mer Info', 'fr' => 'Plus d’infos'],
     'Hidden'=>['en' => 'Hidden', 'sv' => 'Dold', 'fr' => 'Caché'],
     'View'=>['en' => 'View', 'sv' => 'Visa', 'fr' => 'Voir'],
-    'Edit'=>['en' => 'Edit', 'sv' => 'Ändra', 'fr' => Éditer''],
+    'Edit'=>['en' => 'Edit', 'sv' => 'Ändra', 'fr' => 'Éditer'],
     'User'=>['en' => 'User', 'sv' => 'Användare', 'fr' => 'Utilisateur'],
     'Username'=>['en' => 'Username', 'sv' => 'Användarnamn', 'fr' => 'Nom d’utilisateur'],
     'Password'=>['en' => 'Password', 'sv' => 'Lösenord', 'fr' => 'Mot de passe'],
