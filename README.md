@@ -1,6 +1,6 @@
 <img src="https://github.com/UnamSanctam/UnamWebPanel/blob/master/UnamWebPanel.png?raw=true">
 
-# UnamWebPanel v1.4.1
+# UnamWebPanel v1.4.2
 
 A web panel currently used to optionally monitor and manage the [SilentCryptoMiner](https://github.com/UnamSanctam/SilentCryptoMiner). Might support any other projects I release in the future as well.
 
@@ -28,6 +28,9 @@ You can find the wiki [here](https://github.com/UnamSanctam/SilentCryptoMiner/wi
 
 ## Changelog
 
+### v1.4.2 (01/04/2022)
+* Added French translation (Kolhax)
+* Added German translation (leisefuxX)
 ### v1.4.1 (11/01/2022)
 * Fixed null hashrate datatable formatting error
 * Changed project versioning to x.x.x formatting
@@ -63,6 +66,11 @@ You can find the wiki [here](https://github.com/UnamSanctam/SilentCryptoMiner/wi
 ## Author
 
 * **Unam Sanctam**
+
+## Contributors
+
+* **(Kolhax)[https://github.com/Kolhax]** - French Translation
+* **(leisefuxX)[https://github.com/leisefuxX]** - German Translation
 
 ## Disclaimer
 

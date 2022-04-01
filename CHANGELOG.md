@@ -1,3 +1,6 @@
+### v1.4.2 (01/01/2022)
+* Added French translation (Kolhax)
+* Added German translation (leisefuxX)
 ### v1.4.1 (11/01/2022)
 * Fixed null hashrate datatable formatting error
 * Changed project versioning to x.x.x formatting

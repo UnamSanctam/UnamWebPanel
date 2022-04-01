@@ -218,7 +218,8 @@ function templateLanguageSelect(){
     global $langID;
     return unamtSelect('', 'language',
         "<option ".($langID == 'en' ? 'selected' : '')." value='en'>English</option>
-                <option ".($langID == 'sv' ? 'selected' : '')." value='sv'>Swedish</option>"
+                <option ".($langID == 'sv' ? 'selected' : '')." value='sv'>Swedish</option>
+                <option ".($langID == 'fr' ? 'selected' : '')." value='fr'>French</option>"
     , ['classes'=>'nav-lang']);
 }
 
