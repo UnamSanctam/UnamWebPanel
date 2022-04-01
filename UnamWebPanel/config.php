@@ -20,7 +20,7 @@ $config['failedlogin_blocktries'] = 5;
 
 $config['api_minreportime'] = 50;
 
-$config['languages'] = ['en', 'sv', 'fr'];
+$config['languages'] = ['en', 'sv', 'fr', 'de'];
 
 $config['unam_version'] = "1.4.2";
 

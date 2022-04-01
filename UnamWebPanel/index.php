@@ -145,6 +145,7 @@ function datatableTemplate(table, _data={}, minmode=false, _columnDefs=[]){
         lengthMenu : [[5, 10, 25, 50, -1 ],['5', '10', '25', '50', 'All' ]],
         order: [[ 0, "desc" ]],
         stateSave: true,
+        stateDuration: 0,
         processing: true,
         serverSide: true,
         sScrollX: "100%",
