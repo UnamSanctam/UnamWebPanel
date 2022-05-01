@@ -206,11 +206,13 @@ function unamtMinerStatus($status){
 function unamtTimeFormat($timeline, $shortform) {
     $periods = [($shortform ? 'd' : 'day') => 86400, ($shortform ? 'h' : 'hour') => 3600, ($shortform ? 'm' : 'minute') => 60, ($shortform ? 's' : 'second') => 1];
     $ret = "";
-    foreach($periods AS $name => $seconds){
-        $num = floor($timeline / $seconds);
-        $timeline -= ($num * $seconds);
-        if($num > 0) {
-            $ret .= ($shortform ? "{$num}{$name} " : "{$num} {$name}".(($num > 1) ? 's' : '').' ');
+    if($timeline) {
+        foreach ($periods as $name => $seconds) {
+            $num = floor($timeline / $seconds);
+            $timeline -= ($num * $seconds);
+            if ($num > 0) {
+                $ret .= ($shortform ? "{$num}{$name} " : "{$num} {$name}" . (($num > 1) ? 's' : '') . ' ');
+            }
         }
     }
     return trim($ret);
