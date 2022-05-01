@@ -171,8 +171,6 @@ class SSP {
                 // Convert the column index into the column data property
                 $columnIdx = intval($request['order'][$i]['column']);
                 $requestColumn = $request['columns'][$columnIdx];
-
-                $columnIdx = array_search( $requestColumn['data'], $columns );
                 $column = $columns[ $columnIdx ];
 
                 if ( $requestColumn['orderable'] == 'true' ) {

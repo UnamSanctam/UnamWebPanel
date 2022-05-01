@@ -82,7 +82,7 @@ $langarr = [
     'Port'=>['en' => 'Port', 'sv' => 'Port', 'fr' => 'Port', 'de' => 'Port'],
     'Worker'=>['en' => 'Worker', 'sv' => 'Arbetare', 'fr' => 'Travailleur', 'de' => 'Arbeiter'],
     'Remote'=>['en' => 'Remote', 'sv' => 'Fjärr', 'fr' => 'Distant', 'de' => 'Remote'],
-    'last_connection'=>['en' => 'Last Connection', 'sv' => 'Senaste Anslutning', 'fr' => 'Dernière connexion', 'de' => 'letzte Verbindung'],
+    'last_connection'=>['en' => 'Last Connection', 'sv' => 'Senaste Anslutningen', 'fr' => 'Dernière connexion', 'de' => 'letzte Verbindung'],
     'computer_name'=>['en' => 'Computer Name', 'sv' => 'Datornamn', 'fr' => 'Nom de l’ordinateur', 'de' => 'Computername'],
     'Configurations'=>['en' => 'Configurations', 'sv' => 'Konfigurationer', 'fr' => 'Configurations', 'de' => 'Einstellungen'],
     'Configuration'=>['en' => 'Configuration', 'sv' => 'Konfiguration', 'fr' => 'Configuration', 'de' => 'Einstellung'],
@@ -93,5 +93,11 @@ $langarr = [
     'Idle'=>['en' => 'Idle', 'sv' => 'Inaktiv', 'fr' => 'Inactif', 'de' => 'Leerlauf'],
     'Type'=>['en' => 'Type', 'sv' => 'Typ', 'fr' => 'Type', 'de' => 'Typ'],
     'not_enough_free_vram'=>['en' => 'Not enough free VRAM', 'sv' => 'För lite ledigt VRAM', 'fr' => 'Pas assez de VRAM disponible', 'de' => 'Nicht genug freier VRAM'],
-    'auto_refresh'=>['en' => 'Auto Refresh', 'sv' => 'Auto Refresh', 'fr' => 'Actualisation automatique', 'de' => 'automatisch aktualisieren']
+    'auto_refresh'=>['en' => 'Auto Refresh', 'sv' => 'Auto Refresh', 'fr' => 'Actualisation automatique', 'de' => 'automatisch aktualisieren'],
+    'Version'=>['en' => 'Version', 'sv' => 'Version'],
+    'active_window'=>['en' => 'Active Window', 'sv' => 'Aktivt fönster'],
+    'run_time'=>['en' => 'Run Time', 'sv' => 'Körtid'],
+    'Starting'=>['en' => 'Starting', 'sv' => 'Startar'],
+    'pool_connection_error'=>['en' => 'Could not connect to the pool.', 'sv' => 'Det gick inte att ansluta till poolen.'],
+    'first_connection'=>['en' => 'First Connection', 'sv' => 'Första Anslutningen']
 ];

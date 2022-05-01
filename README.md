@@ -1,6 +1,6 @@
 <img src="https://github.com/UnamSanctam/UnamWebPanel/blob/master/UnamWebPanel.png?raw=true">
 
-# UnamWebPanel v1.4.2
+# UnamWebPanel v1.5.0
 
 A web panel currently used to optionally monitor and manage the [SilentCryptoMiner](https://github.com/UnamSanctam/SilentCryptoMiner). Might support any other projects I release in the future as well.
 
@@ -10,7 +10,7 @@ The panel is quite easy to set up, the only real requirement is a  web server wi
 
 Here are some simple steps to get started:
 1. Download the panel files and open the UnamWebPane\config.php file with a text editor.
-2. Change the `$config['password']` to whatever password you wish to use, this is the password used to access the web panel.
+2. Change the `$config['password'] = 'UnamSanctam';` (change `UnamSanctam` to your own password) to whatever password you wish to use, this is the password used to access the web panel.
 3. Upload the contents of the UnamWebPanel folder to your webhosts "public_html" folder or the respective folder for your specific webhost.
 4. Your web panel should now be up and running, you can browse to the URL or IP of your website and you should see the login screen if everything went correctly.
 
@@ -28,6 +28,16 @@ You can find the wiki [here](https://github.com/UnamSanctam/SilentCryptoMiner/wi
 
 ## Changelog
 
+### 1.5.0 (01/05/2022)
+* Added new field "Version" that shows the miner version
+* Added new field "Active Window" that shows the currently active foreground windows title
+* Added new field "Run Time" that shows how long the current session of the miner has been running for
+* Added "First Connection" field that shows the date and time when the miner first connected
+* Added new miner statuses "Starting" and "Error"
+* Added text next to the "Offline" status that shows how long the miner has been offline
+* Added error text when an XMR miner cannot connect to its pool
+* Added German and French datatable translation files
+* Fixed miner table ordering
 ### v1.4.2 (01/04/2022)
 * Added French translation (Kolhax)
 * Added German translation (leisefuxX)

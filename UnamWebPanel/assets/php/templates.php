@@ -183,20 +183,41 @@ function unamtMinerStatus($status){
     global $larr;
     switch($status){
         case 1:
-            return "<span class='text-status-red'>{$larr['Stopped']}</span>";
+            return unamtStatusColor('red', $larr['Stopped']);
         case 2:
-            return "<span class='text-status-green'>{$larr['Active']}</span>";
+            return unamtStatusColor('green', $larr['Active']);
         case 3:
-            return "<span class='text-status-green'>{$larr['Active']} ({$larr['Idle']})</span>";
+            return unamtStatusColor('green', "{$larr['Active']} ({$larr['Idle']})");
         case 4:
-            return "<span class='text-status-yellow'>{$larr['Paused']} ({$larr['Stealth']})</span>";
+            return unamtStatusColor('yellow', "{$larr['Paused']} ({$larr['Stealth']})");
         case 5:
-            return "<span class='text-status-yellow'>{$larr['not_enough_free_vram']}</span>";
+            return unamtStatusColor('yellow', $larr['not_enough_free_vram']);
         case 6:
-            return "<span class='text-status-red'>{$larr['Offline']}</span>";
+            return unamtStatusColor('yellow', $larr['Starting']);
+        case 7:
+            return unamtStatusColor('red', $larr['Error']);
+        case -1:
+            return unamtStatusColor('red', $larr['Offline']);
         default:
-            return "<span class='text-status-red'>{$larr['Unknown']}</span>";
+            return unamtStatusColor('red', $larr['Unknown']);
     }
+}
+
+function unamtTimeFormat($timeline, $shortform) {
+    $periods = [($shortform ? 'd' : 'day') => 86400, ($shortform ? 'h' : 'hour') => 3600, ($shortform ? 'm' : 'minute') => 60, ($shortform ? 's' : 'second') => 1];
+    $ret = "";
+    foreach($periods AS $name => $seconds){
+        $num = floor($timeline / $seconds);
+        $timeline -= ($num * $seconds);
+        if($num > 0) {
+            $ret .= ($shortform ? "{$num}{$name} " : "{$num} {$name}".(($num > 1) ? 's' : '').' ');
+        }
+    }
+    return trim($ret);
+}
+
+function unamtStatusColor($color, $status){
+    return "<span class='text-status-{$color}'>{$status}</span>";
 }
 
 function unamtFormatHashrate($num)

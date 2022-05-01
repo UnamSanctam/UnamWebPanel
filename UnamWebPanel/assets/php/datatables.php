@@ -29,7 +29,8 @@
                         'db_column'=>'status',
                         'display'=>$larr['Status'],
                         'formatting'=>function($d, $s){
-                            return unamtMinerStatus(isset($s['ms_lastConnection']) && ((strtotime(date("Y-m-d H:i:s")) - strtotime($s['ms_lastConnection'])) > 300) ? 6 : $d);
+                            $offline = isset($s['ms_lastConnection']) && ((strtotime(date("Y-m-d H:i:s")) - strtotime($s['ms_lastConnection'])) > 300);
+                            return unamtMinerStatus(empty($s['ms_pool']) ? 7 : ($offline ? -1 : $d)).($offline ? unamtStatusColor('red', " (".unamtTimeFormat((strtotime(date("Y-m-d H:i:s")) - strtotime($s['ms_lastConnection'])), true).")") : '');
                         }
                     ],
                     'algorithm'=>[
@@ -45,7 +46,11 @@
                     ],
                     'pool'=>[
                         'db_column'=>'pool',
-                        'display'=>$larr['Pool']
+                        'display'=>$larr['Pool'],
+                        'formatting'=>function($d){
+                            global $larr;
+                            return  $d ?? unamtStatusColor('red', $larr['pool_connection_error']);
+                        }
                     ],
                     'port'=>[
                         'db_column'=>'port',
@@ -75,6 +80,10 @@
                         'db_column'=>'type',
                         'display'=>$larr['Type']
                     ],
+                    'version'=>[
+                        'db_column'=>'version',
+                        'display'=>$larr['Version']
+                    ],
                     'gpu'=>[
                         'db_column'=>'gpu',
                         'display'=>'GPU'
@@ -83,6 +92,17 @@
                         'db_column'=>'cpu',
                         'display'=>'CPU'
                     ],
+                    'activewindow'=>[
+                        'db_column'=>'activewindow',
+                        'display'=>$larr['active_window']
+                    ],
+                    'runtime'=>[
+                        'db_column'=>'runtime',
+                        'display'=>$larr['run_time'],
+                        'formatting'=>function($d){
+                            return unamtTimeFormat($d, false);
+                        }
+                    ],
                     'remoteURL'=>[
                         'db_column'=>'remoteURL',
                         'display'=>"{$larr['Remote']} {$larr['URL']}"
@@ -90,6 +110,10 @@
                     'lastConnection'=>[
                         'db_column'=>'lastConnection',
                         'display'=>$larr['last_connection'],
+                    ],
+                    'creationDate'=>[
+                        'db_column'=>'creationDate',
+                        'display'=>$larr['first_connection'],
                     ],
                     'config'=>[
                         'db_column'=>'config',

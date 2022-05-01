@@ -2,6 +2,7 @@
 /* Made by Unam Sanctam https://github.com/UnamSanctam */
 $config = [];
 
+/* Change UnamSancam below to change the password. */
 $config['password'] = 'UnamSanctam';
 
 /*
@@ -22,6 +23,6 @@ $config['api_minreportime'] = 50;
 
 $config['languages'] = ['en', 'sv', 'fr', 'de'];
 
-$config['unam_version'] = "1.4.2";
+$config['unam_version'] = "1.5.0";
 
 global $config;

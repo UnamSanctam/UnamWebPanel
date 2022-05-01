@@ -1,4 +1,14 @@
-### v1.4.2 (01/01/2022)
+### 1.5.0 (01/05/2022)
+* Added new field "Version" that shows the miner version
+* Added new field "Active Window" that shows the currently active foreground windows title
+* Added new field "Run Time" that shows how long the current session of the miner has been running for
+* Added "First Connection" field that shows the date and time when the miner first connected
+* Added new miner statuses "Starting" and "Error"
+* Added text next to the "Offline" status that shows how long the miner has been offline
+* Added error text when an XMR miner cannot connect to its pool
+* Added German and French datatable translation files
+* Fixed miner table ordering
+### v1.4.2 (01/04/2022)
 * Added French translation (Kolhax)
 * Added German translation (leisefuxX)
 ### v1.4.1 (11/01/2022)
