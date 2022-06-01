@@ -32,15 +32,20 @@ class SSP {
         $columns = $options['columns'];
         for ( $i=0, $ien=count($data) ; $i<$ien ; $i++ ) {
             $row = array();
+            $cur = 0;
             for ( $j=0, $jen=count($columns) ; $j<$jen ; $j++ ) {
                 $column = $columns[$j];
                 // Is there a formatter?
-                if (isset( $column['formatting'] ) ) {
-                    $row[$j] = $column['formatting']( $data[$i][ self::column_name_out($column) ], $data[$i] );
+                if(isset($column['hidden']) && $column['hidden']){
+                    continue;
+                }
+                else if (isset( $column['formatting'] ) ) {
+                    $row[$cur] = $column['formatting']( $data[$i][ self::column_name_out($column) ], $data[$i] );
                 }
                 else {
-                    $row[$j] = $data[$i][ self::column_name_out($column) ];
+                    $row[$cur] = $data[$i][ self::column_name_out($column) ];
                 }
+                $cur++;
             }
             $out[] = $row;
         }
@@ -67,11 +72,19 @@ class SSP {
         if (!isset($options['db_alias']))
             $options['db_alias'] = $options['db_table'][0];
 
+        $optionsE = $options;
+        foreach($options['columns'] as $key=>$value){
+            if(isset($value['hidden']) && $value['hidden']){
+                unset($optionsE['columns'][$key]);
+                $optionsE['columns'] = array_values($optionsE['columns']);
+            }
+        }
+
         // Build the SQL query string from the request
         $limitSql = self::limit( $request );
-        $orderSql = self::order( $request, $options );
-        $whereSql = self::filter( $request, $options, $bindings );
-        $joinSql  = self::table_join( $options );
+        $orderSql = self::order( $request, $optionsE );
+        $whereSql = self::filter( $request, $optionsE, $bindings );
+        $joinSql  = self::table_join( $optionsE );
 
         $whereAllSql = '';
 

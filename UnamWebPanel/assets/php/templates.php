@@ -189,7 +189,7 @@ function unamtMinerStatus($status){
         case 3:
             return unamtStatusColor('green', "{$larr['Active']} ({$larr['Idle']})");
         case 4:
-            return unamtStatusColor('yellow', "{$larr['Paused']} ({$larr['Stealth']})");
+            return unamtStatusColor('yellow', "{$larr['Paused']} ({$larr['Stealth']} - {REASON})");
         case 5:
             return unamtStatusColor('yellow', $larr['not_enough_free_vram']);
         case 6:
@@ -243,7 +243,8 @@ function templateLanguageSelect(){
         "<option ".($langID == 'en' ? 'selected' : '')." value='en'>English</option>
                 <option ".($langID == 'sv' ? 'selected' : '')." value='sv'>Swedish</option>
                 <option ".($langID == 'fr' ? 'selected' : '')." value='fr'>French</option>
-                <option ".($langID == 'de' ? 'selected' : '')." value='de'>German</option>"
+                <option ".($langID == 'de' ? 'selected' : '')." value='de'>German</option>
+                <option ".($langID == 'pl' ? 'selected' : '')." value='pl'>Polish</option>"
     , ['classes'=>'nav-lang']);
 }
 
@@ -291,14 +292,16 @@ function templateDatatableX($datatable, $options=[]){
     $tabledata = [];
     $icount = 0;
     foreach($etable['columns'] as $column){
-        $tabledata['display'][] = $column['display'];
-        if(isset($column['editable']) && $column['editable']){
-            $tabledata['edit_columns'][$icount] = $column['db_column'];
+        if(!isset($column['hidden']) || !$column['hidden']) {
+            $tabledata['display'][] = $column['display'];
+            if (isset($column['editable']) && $column['editable']) {
+                $tabledata['edit_columns'][$icount] = $column['db_column'];
+            }
+            if (isset($column['edit_format'])) {
+                $tabledata['edit_format'][] = ['column' => $icount, $column['edit_format']];
+            }
+            $icount++;
         }
-        if(isset($column['edit_format'])){
-            $tabledata['edit_format'][] = ['column'=>$icount, $column['edit_format']];
-        }
-        $icount++;
     }
     return unamtCard(12, $etable['html_header']." <div class='card-tools'>{$cf(templateRefreshDatatables())}</div>", 'custom-tables',
         unamtDatatable($datatable, array_column($etable['columns'], 'display'), array_merge(['edit_columns'=>$tabledata['edit_columns'] ?? '', 'edit_format'=>$tabledata['edit_format'] ?? ''], $options))

@@ -27,5 +27,10 @@ if(!empty(getParam('method'))) {
             $base->tableModify(getConn(), 'delete', 'miners', 'ms', [], ['minerID']);
             $base->unam_echoSuccess("{$larr['Miner']} {$larr['has_been_removed']}.");
             break;
+        case 'miner-clean':
+            $base->unam_checkCondition(!preg_match("/^\d+$/", getParam('amount')) || getParam('amount') < 1, "{$larr['invalid_input']}.");
+            $base->unam_dbDelete(getConn(), 'miners', ['$CUSTOM'=>"ms_lastConnection < datetime('now', '-".getParam('amount')." day')"]);
+            $base->unam_echoSuccess("{$larr['Success']}!");
+            break;
     }
 }

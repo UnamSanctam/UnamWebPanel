@@ -14,6 +14,7 @@ function getConn($type='conn'){
             {
                 $conn = new PDO($connectionString);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $conn->exec('PRAGMA synchronous = NORMAL;PRAGMA temp_store = MEMORY;');
                 return $conn;
             }
             catch(PDOException $e)

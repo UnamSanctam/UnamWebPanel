@@ -1,5 +1,5 @@
 DirectoryIndex index.php
-<Files "unamwebpanel.db">  
+<FilesMatch "unamwebpanel\.db">  
   Require all denied
-</Files>
+</FilesMatch>
 Options -Indexes

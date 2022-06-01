@@ -193,6 +193,7 @@ function errorMessage(error){
 function reloadDatatables(){
     for (let table in datatables) {
         datatables[table].ajax.reload(null, false);
+        datatables[table].responsive.recalc()
     }
 }
 
@@ -314,6 +315,7 @@ function loadPageContentAjax(scope, _type, _url, _data={}, _container='.ajaxcont
                           if(editColumns){
                               datatableEditable(datatables[scope.data('tableid')], Object.keys(editColumns).map(Number), (scope.data('editformat') ? scope.data('editformat') : [{}]));
                           }
+                          datatables[scope.data('tableid')].responsive.recalc()
                       }
                   });
 

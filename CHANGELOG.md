@@ -1,3 +1,13 @@
+### 1.6.0 (01/06/2022)
+* Added support for reporting the executable name of the program that triggered "Stealth" and displaying it in the status text
+* Added offline miner removal tool which removes miners who have been offline for longer than the chosen number of days
+* Added support for new miner ID per build to allow for running multiple miners of the same type at the same time
+* Added Polish translation (Werlrlivx)
+* Changed database settings to allow for better performance during large amounts of activity
+* Changed offline status time threshold from five minutes to three minutes
+* Changed endpoint text when the request isn't from the miner to reduce confusion
+* Changed string sanitation away from FILTER_SANITIZE_STRING due to PHP 8.1 deprication
+* Moved database to its own folder to allow for broader database file blocks
 ### 1.5.0 (01/05/2022)
 * Added new field "Version" that shows the miner version
 * Added new field "Active Window" that shows the currently active foreground windows title

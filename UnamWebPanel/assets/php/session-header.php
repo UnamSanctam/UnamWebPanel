@@ -19,7 +19,7 @@ $loggedin = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true;
 
 $currentDate = date('Y-m-d H:i:s');
 
-$langID = (isset($_SESSION['lang']) && !empty($_SESSION['lang']) ? $_SESSION['lang']: 'en');
+$langID = !empty($_SESSION['lang']) ? $_SESSION['lang'] : 'en';
 
 require_once dirname(__DIR__, 2).'/lang/lang.php';
 

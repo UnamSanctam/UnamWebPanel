@@ -130,27 +130,28 @@ class unam_lib {
         }
     }
 
-    function unam_filterParameter($param, $maxlength = 1000, $default = '', $filter=FILTER_SANITIZE_STRING,  $flags=FILTER_FLAG_NO_ENCODE_QUOTES){
+    function unam_filterParameter($param, $maxlength = 1000, $default = ''){
         if(!isset($_POST[$param]) && !isset($_GET[$param])) {
             return $default;
         }
-        $fparam = self::unam_arrayWalkRecursive(filter_input((isset($_POST[$param]) ? INPUT_POST : INPUT_GET), $param, $filter, FILTER_FORCE_ARRAY | $flags), function(&$v){ global $maxlength; $v = substr($v, $maxlength); });
+        $fparam = self::unam_arrayWalkRecursive($_POST[$param] ?? $_GET[$param], function(&$v){ global $maxlength; $v = strip_tags(substr($v, $maxlength)); });
         return (count($fparam) == 1 ? $fparam[0] : $fparam);
     }
 
-    function unam_filterAllParameters($maxlength = 1000, $default = '', $filter=FILTER_SANITIZE_STRING,  $flags=FILTER_FLAG_NO_ENCODE_QUOTES)
+    function unam_filterAllParameters($maxlength = 1000, $default = '')
     {
         $paramarr = array_merge($_POST, $_GET);
         $outarr = [];
         if(is_array($paramarr)){
             foreach($paramarr as $param=>$data){
-                $outarr[$param] = self::unam_filterParameter($param, $maxlength, $default, $filter, $flags);
+                $outarr[$param] = self::unam_filterParameter($param, $maxlength, $default);
             }
         }
         return $outarr;
     }
 
     function unam_arrayWalkRecursive($arr, $function){
+        $arr = is_array($arr) ? $arr : [$arr];
         array_walk_recursive($arr, $function);
         return $arr;
     }

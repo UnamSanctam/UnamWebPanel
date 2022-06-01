@@ -14,15 +14,15 @@ $config['password'] = 'UnamSanctam';
  * WEBSITEURL/unamwebpanel.db (replace WEBSITEURL with your URL),
  * if it returns a 403 Forbidden error then you are protected
  */
-$config['db_file'] = dirname(__FILE__)."/unamwebpanel.db";
+$config['db_file'] = dirname(__FILE__)."/db/unamwebpanel.db";
 
 $config['failedlogin_blocktime'] = 15;
 $config['failedlogin_blocktries'] = 5;
 
 $config['api_minreportime'] = 50;
 
-$config['languages'] = ['en', 'sv', 'fr', 'de'];
+$config['languages'] = ['en', 'sv', 'fr', 'de', 'pl'];
 
-$config['unam_version'] = "1.5.0";
+$config['unam_version'] = "1.6.0";
 
 global $config;

