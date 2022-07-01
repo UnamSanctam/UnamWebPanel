@@ -1,4 +1,5 @@
-{
+ {
+
     "emptyTable": "В таблице нет данных",
     "info": "от _START_ до _END_ из _TOTAL_ записей",
     "infoEmpty": "Данные недоступны",
@@ -9,7 +10,7 @@
     "paginate": {
         "first": "Первый",
         "previous": "Назад",
-        "next": "Далее",
+        "next": "Впёред",
         "last": "Последний"
     },
     "aria": {
@@ -138,7 +139,7 @@
     },
     "thousands": ".",
     "zeroRecords": "Подходящие записи не найдены",
-    "lengthMenu": "_MENU_ показать строки",
+    "lengthMenu": "Показать _MENU_ строк",
     "datetime": {
         "previous": "Предыдущий",
         "next": "Следующий",
