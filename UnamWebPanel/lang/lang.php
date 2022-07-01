@@ -36,7 +36,7 @@ $langarr = [
     'Password'=>['en' => 'Password', 'sv' => 'Lösenord', 'fr' => 'Mot de passe', 'de' => 'Passwort', 'pl' => 'Hasło', 'ru' => 'Пароль'],
     'display_name'=>['en' => 'Display Name', 'sv' => 'Visningsnamn', 'fr' => 'Nom d’affichage', 'de' => 'Anzeigename', 'pl' => 'Wyświetl nazwę', 'ru' => 'Отображаемое имя'],
     'Summary'=>['en' => 'Summary', 'sv' => 'Sammanfattning', 'fr' => 'Résumé', 'de' => 'Zusammenfassung', 'pl' => 'Wyświetl nazwę', 'ru' => 'Кратко'],
-    'Login'=>['en' => 'Login', 'sv' => 'Logga In', 'fr' => 'Connectez-vous', 'de' => 'Einloggen', 'pl' => 'Zaloguj', 'ru' => 'Логин'],
+    'Login'=>['en' => 'Login', 'sv' => 'Logga In', 'fr' => 'Connectez-vous', 'de' => 'Einloggen', 'pl' => 'Zaloguj', 'ru' => 'Вход'],
     'Continue'=>['en' => 'Continue', 'sv' => 'Fortsätt', 'fr' => 'Continuer', 'de' => 'Fortfahren', 'pl' => 'Kontynuuj', 'ru' => 'Продолжить'],
     'Choose'=>['en' => 'Choose', 'sv' => 'Välj', 'fr' => 'Choisir', 'de' => 'Auswählen', 'pl' => 'Kontynuuj', 'ru' => 'Выбрать'],
     'Amount'=>['en' => 'Amount', 'sv' => 'Antal', 'fr' => 'Quantité', 'de' => 'Anzahl', 'pl' => 'Ilość', 'ru' => 'Количество'],
