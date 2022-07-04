@@ -95,7 +95,7 @@ $langarr = [
     'not_enough_free_vram'=>['en' => 'Not enough free VRAM', 'sv' => 'För lite ledigt VRAM', 'fr' => 'Pas assez de VRAM disponible', 'de' => 'Nicht genug freier VRAM', 'pl' => 'Za mało VRAMu', 'es' => 'No hay suficiente VRAM disponible'],
     'auto_refresh'=>['en' => 'Auto Refresh', 'sv' => 'Auto Refresh', 'fr' => 'Actualisation automatique', 'de' => 'automatisch aktualisieren', 'pl' => 'Automatyczne odświeżenie', 'es' => 'Actualizar Auto.'],
     'Version'=>['en' => 'Version', 'sv' => 'Version', 'pl' => 'Wersja', 'es' => 'Versión'],
-    'active_window'=>['en' => 'Active Window', 'sv' => 'Aktivt fönster', 'pl' => 'Aktywne okno', 'es' => 'Activar ventana'],
+    'active_window'=>['en' => 'Active Window', 'sv' => 'Aktivt fönster', 'pl' => 'Aktywne okno', 'es' => 'Ventana Activa'],
     'run_time'=>['en' => 'Run Time', 'sv' => 'Körtid', 'pl' => 'Czas wykonywania', 'es' => 'Tiempo ejecutándose'],
     'Starting'=>['en' => 'Starting', 'sv' => 'Startar', 'pl' => 'Startuje', 'es' => 'Iniciando'],
     'pool_connection_error'=>['en' => 'Could not connect to the pool.', 'sv' => 'Det gick inte att ansluta till poolen.', 'pl' => 'Nie udało się połączyć z poolem', 'es' => 'No se ha podido conectar a la pool'],
