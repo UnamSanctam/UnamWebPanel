@@ -83,7 +83,7 @@ $langarr = [
     'Worker'=>['en' => 'Worker', 'sv' => 'Arbetare', 'fr' => 'Travailleur', 'de' => 'Arbeiter', 'pl' => 'Pracownik', 'es' => 'Trabajador'],
     'Remote'=>['en' => 'Remote', 'sv' => 'Fjärr', 'fr' => 'Distant', 'de' => 'Remote', 'pl' => 'Pilot', 'es' => 'Remoto'],
     'last_connection'=>['en' => 'Last Connection', 'sv' => 'Senaste Anslutningen', 'fr' => 'Dernière connexion', 'de' => 'letzte Verbindung', 'pl' => 'Ostatnie połączenie', 'es' => 'Última conexión'],
-    'computer_name'=>['en' => 'Computer Name', 'sv' => 'Datornamn', 'fr' => 'Nom de l’ordinateur', 'de' => 'Computername', 'pl' => 'Nazwa komputera', 'es' => 'Nombre del ordenador'],
+    'computer_name'=>['en' => 'Computer Name', 'sv' => 'Datornamn', 'fr' => 'Nom de l’ordinateur', 'de' => 'Computername', 'pl' => 'Nazwa komputera', 'es' => 'Nombre del PC'],
     'Configurations'=>['en' => 'Configurations', 'sv' => 'Konfigurationer', 'fr' => 'Configurations', 'de' => 'Einstellungen', 'pl' => 'Konfiguracje', 'es' => 'Configuraciones'],
     'Configuration'=>['en' => 'Configuration', 'sv' => 'Konfiguration', 'fr' => 'Configuration', 'de' => 'Einstellung', 'pl' => 'Konfiguracja', 'es' => 'Configuración'],
     'cannot_remove_default'=>['en' => 'Cannot remove the default value.', 'sv' => 'Det går inte att ta bort standardvärdet', 'fr' => 'Impossible de supprimer la valeur par défaut.', 'de' => 'Kann die Voreinstellung nicht entfernen', 'pl' => 'Nie można usunąć podstawowej liczby', 'es' => 'No se puede eliminar el valor por defecto'],
