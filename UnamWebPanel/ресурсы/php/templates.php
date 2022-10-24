@@ -245,7 +245,7 @@ function templateLanguageSelect(){
                 <option ".($langID == 'fr' ? 'selected' : '')." value='fr'>French</option>
                 <option ".($langID == 'de' ? 'selected' : '')." value='de'>German</option>
                 <option ".($langID == 'pl' ? 'selected' : '')." value='pl'>Polish</option>
-                <option ".($langID == 'ua' ? 'selected' : '')." value='ua'>Ukraine</option>"
+                <option ".($langID == 'ua' ? 'selected' : '')." value='ua'>Ukrainian</option>"
     , ['classes'=>'nav-lang']);
 }
 
