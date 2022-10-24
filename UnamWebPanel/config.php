@@ -21,7 +21,7 @@ $config['failedlogin_blocktries'] = 5;
 
 $config['api_minreportime'] = 50;
 
-$config['languages'] = ['en', 'sv', 'fr', 'de', 'pl'];
+$config['languages'] = ['en', 'sv', 'fr', 'de', 'pl', 'ua'];
 
 $config['unam_version'] = "1.6.0";
 
