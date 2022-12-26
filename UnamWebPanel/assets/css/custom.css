@@ -258,3 +258,20 @@ input:checked + .round-slider:before {
     -ms-transform: translateX(18px);
     transform: translateX(18px);
 }
+
+.card .card-tools label:not(:last-child) {
+    margin-right: 8px;
+}
+
+.dark-mode .bg-warning, .dark-mode .bg-warning>a {
+    color: #ffffff !important;
+}
+
+.dark-mode .bg-success {
+    background-color: #28a745!important;
+}
+
+.statistic-cards {
+    font-size: 1.2rem;
+    font-weight: 600;
+}

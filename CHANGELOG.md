@@ -1,3 +1,15 @@
+### 1.7.0 (25/12/2022)
+* Greatly improved database performance
+* Greatly improved endpoint performance
+* Added configurable hashrate history feature
+* Added "Total Hashrate" graphs for each algorithm
+* Added individual "Hashrate History" to each miner
+* Added miner status statistics
+* Fixed datatable width scaling
+* Added "Hide Offline Miners" option
+* Fixed status priority for offline and error statuses
+* Added Russian translation (marat2509)
+* Added Ukrainian translation (Zem0rt)
 ### 1.6.0 (01/06/2022)
 * Added support for reporting the executable name of the program that triggered "Stealth" and displaying it in the status text
 * Added offline miner removal tool which removes miners who have been offline for longer than the chosen number of days

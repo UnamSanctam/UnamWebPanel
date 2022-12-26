@@ -2,11 +2,9 @@
 /* Made by Unam Sanctam https://github.com/UnamSanctam */
 
 class unam_lib {
-    private static $debugStart;
     private static $usingCustomErrorHandler;
 
     function __construct() {
-        self::$debugStart = microtime(true);
         self::$usingCustomErrorHandler = false;
     }
 
@@ -94,11 +92,12 @@ class unam_lib {
 
         try {
             $s = $conn->prepare("UPDATE $tableName SET ".implode(', ', $UpdateString)." WHERE ".implode(' AND ', $where_flag));
-            return $s->execute($ExecuteString);
+            $s->execute($ExecuteString);
+            return $s->rowCount() > 0;
         }
         catch(PDOException $e){
             self::unam_writeError("</br><b>An error occured: </b> </br>{$e->getMessage()}");
-            return [];
+            return false;
         }
     }
 
@@ -134,7 +133,7 @@ class unam_lib {
         if(!isset($_POST[$param]) && !isset($_GET[$param])) {
             return $default;
         }
-        $fparam = self::unam_arrayWalkRecursive($_POST[$param] ?? $_GET[$param], function(&$v){ global $maxlength; $v = strip_tags(substr($v, $maxlength)); });
+        $fparam = self::unam_arrayWalkRecursive($_POST[$param] ?? $_GET[$param], function(&$v) use(&$maxlength){ $v = strip_tags(substr($v, 0, $maxlength)); });
         return (count($fparam) == 1 ? $fparam[0] : $fparam);
     }
 
@@ -166,47 +165,6 @@ class unam_lib {
         return true;
     }
 
-    function unam_recursiveGenerator($conn, $tableName, $fieldName, $length=32, $numbersonly=false)
-    {
-        $id = self::unam_generateRandomString($length, $numbersonly);
-        if(self::unam_dbSelect($conn, $tableName, $fieldName, [$fieldName=>$id])){
-            self::unam_recursiveGenerator($conn, $tableName, $fieldName, $length);
-        }
-        else{
-            return $id;
-        }
-        return false;
-    }
-
-    function unam_generateRandomString($length=32, $numbersonly=false) {
-        return substr(str_shuffle(str_repeat($x='0123456789'.($numbersonly == false ? 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' : ''), ceil($length/strlen($x)) )),1,$length);
-    }
-
-    function unam_multiStrpos($string, $check, $getResults = false)
-    {
-        $result = array();
-        $check = (array) $check;
-
-        foreach ($check as $s)
-        {
-            $pos = strpos($string, $s);
-
-            if ($pos !== false)
-            {
-                if ($getResults)
-                {
-                    $result[$s] = $pos;
-                }
-                else
-                {
-                    return $pos;
-                }
-            }
-        }
-
-        return empty($result) ? false : $result;
-    }
-
     function unam_checkCondition($cond, $resp){
         if($cond === true){
             self::unam_echoFailure($resp);
@@ -221,7 +179,6 @@ class unam_lib {
         echo json_encode(['response'=>'failure', 'errormsg'=>$errormsg]);
     }
 
-
     function unam_getBrowserLanguages($available = [], $default = 'en') {
         if (isset( $_SERVER[ 'HTTP_ACCEPT_LANGUAGE' ])) {
             $langs = explode( ',', $_SERVER['HTTP_ACCEPT_LANGUAGE'] );
@@ -229,7 +186,7 @@ class unam_lib {
                 return $langs[0];
             }
             foreach($langs as $lang){
-                $lang = substr( $lang, 0, 2 );
+                $lang = substr($lang, 0, 2);
                 if(in_array( $lang, $available)){
                     return $lang;
                 }
@@ -264,7 +221,9 @@ class unam_lib {
         $errout .= "<br/><b>Error was: </b> [$errno] $errstr";
         $errout .= "<br/><details><summary><b>Error context:</b></summary><p>".(is_array($error_context) ? json_encode($error_context) : $error_context)."</p></details>";
         $errout .= "<br/><b>Remote IP:</b> $err_hostname_ip";
-        $errout .= "<br/><b>Session Data:</b> ".json_encode($_SESSION);
+        if(isset($_SESSION)) {
+            $errout .= "<br/><b>Session Data:</b> " . json_encode($_SESSION);
+        }
         $errout .= "<br/>Ending Script";
         $errout .= "<hr />";
 
@@ -274,9 +233,5 @@ class unam_lib {
 
     function unam_writeError($errormessage, $debug_trace=true){
         file_put_contents(__DIR__."/Logs/php-error-".date('m-d-Y').".html", "ERROR: $errormessage ".($debug_trace ? "<details><summary><b>Debug Trace: </b></summary><p>".json_encode(array_slice(debug_backtrace(), 1)) .'</p></details></br>': ''), FILE_APPEND);
-    }
-
-    function unam_debugOutput($id){
-        file_put_contents(__DIR__."/Logs/php-exec-time-".date('m-d-Y').".html", "{$id}: ".(microtime(true) - self::$debugStart)." SEC </br>", FILE_APPEND);
     }
 }

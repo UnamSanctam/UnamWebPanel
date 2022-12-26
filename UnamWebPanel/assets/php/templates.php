@@ -22,6 +22,8 @@ function generalJSIncludes(){
             <script src='assets/modules/overlayScrollbars/js/jquery.overlayScrollbars.min.js'></script>
             <script src='assets/modules/jquery-mousewheel/jquery.mousewheel.js'></script>
             <script src='assets/modules/raphael/raphael.min.js'></script>
+            <script src='assets/modules/chartjs/chart.umd.js'></script>
+            <script src='assets/modules/chartjs/chartjs-adapter-date-fns.bundle.min.js'></script>
             <script src='assets/js/adminlte.js'></script>
             <script src='__UNAM_LIB/unam_lib.js'></script>";
 }
@@ -38,6 +40,7 @@ function generalCSSIncludes(){
             <link rel='stylesheet' href='assets/modules/datatables-responsive/css/responsive.bootstrap4.min.css'>
             <link rel='stylesheet' href='assets/modules/datatables-buttons/css/buttons.bootstrap4.min.css'>
             <link rel='stylesheet' href='assets/css/adminlte.min.css'>
+            <link rel='stylesheet' href='assets/css/bootstrap.custom.css'>
             <link rel='stylesheet' href='assets/css/custom.css'>";
 }
 
@@ -119,7 +122,7 @@ function unamtToggleSwitch($checked, $options=[]){
 
 function unamtDatatable($id, $columnarray, $options=[]){
     global $cf;
-    $options = array_merge(['editmethod'=>'', 'edit_columns'=>'', 'edit_format'=>'', 'minmode'=>'false', 'extradata'=>'{}', 'filters'=>'{}', 'classes'=>'', 'extra'=>''], $options);
+    $options = array_merge(['minmode'=>'false', 'extradata'=>'{}', 'filters'=>'{}', 'classes'=>'', 'extra'=>''], $options);
     $columns = implode('</th><th>', $columnarray);
     function safeEncodeJSON($array, $default=''){
         if(!empty($array) && is_array($array)) {
@@ -127,8 +130,8 @@ function unamtDatatable($id, $columnarray, $options=[]){
         }
         return $default;
     }
-    return "<div class='table-responsive hook-datatable container-fluid {$options['classes']}' data-tableid='{$id}' data-editmethod='{$options["editmethod"]}' data-editcolumns='{$cf(safeEncodeJSON($options["edit_columns"]))}' data-editformat='{$cf(safeEncodeJSON($options["edit_format"]))}' data-minmode='{$options["minmode"]}' data-filters='{$cf(json_encode(['filters'=>[$options['filters']]]))}' data-extradata='{$options["extradata"]}' {$options['extra']}>
-                    <table class='table table-bordered table-hover' id='{$id}'>
+    return "<div class='hook-datatable container-fluid {$options['classes']}' data-tableid='{$id}' data-minmode='{$options["minmode"]}' data-filters='{$cf(json_encode(['filters'=>[$options['filters']]]))}' data-extradata='{$options["extradata"]}' {$options['extra']}>
+                    <table class='table table-bordered table-responsive table-hover' width='100%'' id='{$id}'>
                         <thead>
                         <tr>
                             <th>{$columns}</th>
@@ -138,9 +141,9 @@ function unamtDatatable($id, $columnarray, $options=[]){
                 </div>";
 }
 
-function unamtCard($cardsize, $headercontent, $bodyclass, $content, $options=[]){
+function unamtCard($gridclasses, $headercontent, $bodyclass, $content, $options=[]){
     $options = array_merge(['cardclasses'=>'', 'cardextras'=>'', 'headerclasses'=>''], $options);
-    return ($cardsize != false ? "<div class='col-md-{$cardsize}'>" : '')."
+    return ($gridclasses != false ? "<div class='{$gridclasses}'>" : '')."
                 <div class='card {$options['cardclasses']}' {$options['cardextras']}>
                     ".(!empty($headercontent) ? "<div class='card-header {$options['headerclasses']}'>
                         {$headercontent}
@@ -149,7 +152,7 @@ function unamtCard($cardsize, $headercontent, $bodyclass, $content, $options=[])
                         {$content}
                     </div>
                 </div>".
-        ($cardsize != false ? '</div>' : '');
+        ($gridclasses != false ? '</div>' : '');
 }
 
 function unamtAjaxButton($label, $method, $index, $options=[]){
@@ -173,8 +176,9 @@ function unamtSection($sectiontitle, $content, $options=[]){
             </section>";
 }
 
-function unamtRow($content){
-    return "<div class='row'>
+function unamtRow($content, $options=[]){
+    $options = array_merge(['classes'=>''], $options);
+    return "<div class='row {$options['classes']}'>
                 {$content}
             </div>";
 }
@@ -232,20 +236,25 @@ function unamtFormatHashrate($num)
     return round($num, 1)." {$units[$i]}";
 }
 
-function templateRefreshDatatables(){
-    global $larr;
-    return $larr['auto_refresh'].' '.unamtToggleSwitch(false, ['classes'=>'refresh-datatables']);
+function unamtChart($charttype, $chartconfig){
+    return "<canvas class='hook-chart' data-chart-type='{$charttype}' data-chart-config='{$chartconfig}'></canvas>";
+}
+
+function templateHashrateChart($label, $data) {
+    return unamtChart('hashrate', json_encode(['type'=>'bar', 'data'=>['datasets'=>[['label'=>$label, 'data'=>$data, 'fill'=>true]]], 'options'=>['responsive'=>true, 'scales'=>['x'=>['type'=>'time', 'max'=>date('Y-m-d H:i:00'), 'min'=>$data[0]['x'], 'time'=>['minUnit'=>'minute'], 'ticks'=>['color'=>'white']], 'y'=>['ticks'=>['color'=>'white', 'callback'=>''], 'min'=>0]]]]));
+}
+
+function templateDatatableTool($text, $checked, $options){
+    return $text.' '.unamtToggleSwitch($checked, $options);
 }
 
 function templateLanguageSelect(){
-    global $langID;
-    return unamtSelect('', 'language',
-        "<option ".($langID == 'en' ? 'selected' : '')." value='en'>English</option>
-                <option ".($langID == 'sv' ? 'selected' : '')." value='sv'>Swedish</option>
-                <option ".($langID == 'fr' ? 'selected' : '')." value='fr'>French</option>
-                <option ".($langID == 'de' ? 'selected' : '')." value='de'>German</option>
-                <option ".($langID == 'pl' ? 'selected' : '')." value='pl'>Polish</option>"
-    , ['classes'=>'nav-lang']);
+    global $langID, $config;
+    $options = '';
+    foreach($config['languages'] as $key => $value) {
+        $options .= "<option ".($langID == $key ? 'selected' : '')." value='{$key}'>{$value}</option>";
+    }
+    return unamtSelect('', 'language', $options, ['classes'=>'nav-lang']);
 }
 
 function templateExternalPage($title, $content, $options=[]){
@@ -285,25 +294,22 @@ $('.unamLogin').on('submit', function(e){
 }
 
 function templateDatatableX($datatable, $options=[]){
-    global $larr, $cf;
+    global $larr, $config;
     require_once 'datatables.php';
     $table = &$datatables['tables'][$datatable];
     $etable = $table;
     $tabledata = [];
-    $icount = 0;
     foreach($etable['columns'] as $column){
         if(!isset($column['hidden']) || !$column['hidden']) {
             $tabledata['display'][] = $column['display'];
-            if (isset($column['editable']) && $column['editable']) {
-                $tabledata['edit_columns'][$icount] = $column['db_column'];
-            }
-            if (isset($column['edit_format'])) {
-                $tabledata['edit_format'][] = ['column' => $icount, $column['edit_format']];
-            }
-            $icount++;
         }
     }
-    return unamtCard(12, $etable['html_header']." <div class='card-tools'>{$cf(templateRefreshDatatables())}</div>", 'custom-tables',
-        unamtDatatable($datatable, array_column($etable['columns'], 'display'), array_merge(['edit_columns'=>$tabledata['edit_columns'] ?? '', 'edit_format'=>$tabledata['edit_format'] ?? ''], $options))
+    $tools = templateDatatableTool($larr['auto_refresh'], false, ['classes'=>'refresh-datatables']);
+    if($datatable == 'miner-table') {
+        $tools = templateDatatableTool($larr['hide_offline_miners'], $_SESSION['hide_offline_miners'] ?? false, ['classes'=>'hide-offline-miners']).$tools;
+    }
+
+    return unamtCard('col-md-12', $etable['html_header']." <div class='card-tools'>{$tools}</div>", 'custom-tables',
+        unamtDatatable($datatable, $tabledata['display'], $options)
     );
 }

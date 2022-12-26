@@ -4,9 +4,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'off');
 ini_set("log_errors", 1);
 ini_set("error_log", "error.log");
-if(session_status() !== PHP_SESSION_ACTIVE) session_start();
-require_once dirname(__DIR__) . '/__UNAM_LIB/unam_lib.php';
-require_once dirname(__DIR__) . '/config.php';
+require_once dirname(__DIR__).'/__UNAM_LIB/unam_lib.php';
+require_once dirname(__DIR__).'/config.php';
 require_once 'db.php';
 
 class base extends unam_lib

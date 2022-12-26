@@ -35,7 +35,7 @@
                         'formatting'=>function($d, $s){
                             global $larr;
                             $offline = isset($s['ms_lastConnection']) && ((strtotime(date("Y-m-d H:i:s")) - strtotime($s['ms_lastConnection'])) > 180);
-                            $status = unamtMinerStatus(empty($s['ms_pool']) ? 7 : ($offline ? -1 : $d));
+                            $status = unamtMinerStatus($offline ? -1 : (empty($s['ms_pool']) && $d != 6 ? 7 : $d));
                             if($offline) {
                                 $status .= unamtStatusColor('red', " (".unamtTimeFormat((strtotime(date("Y-m-d H:i:s")) - strtotime($s['ms_lastConnection'])), true).")");
                             }
@@ -61,7 +61,7 @@
                         'display'=>$larr['Pool'],
                         'formatting'=>function($d){
                             global $larr;
-                            return  $d ?? unamtStatusColor('red', $larr['pool_connection_error']);
+                            return  empty($d) ? unamtStatusColor('red', $larr['pool_connection_error']) : $d;
                         }
                     ],
                     'port'=>[
@@ -130,6 +130,15 @@
                     'creationDate'=>[
                         'db_column'=>'creationDate',
                         'display'=>$larr['first_connection'],
+                    ],
+                    'hashrateHistory'=>[
+                        'db_column'=>'minerID',
+                        'display'=>$larr['hashrate_history'],
+                        'hidden'=>!$config['hashrate_history_enable'],
+                        'formatting'=>function($d){
+                            global $larr;
+                            return "<span><a href='#' class='btn btn-primary hashrate-history' data-index='{$d}'>{$larr['View']}</a></span>";
+                        }
                     ],
                     'config'=>[
                         'db_column'=>'config',

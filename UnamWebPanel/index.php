@@ -136,6 +136,11 @@ $(document).ready(function()
     }else{
         clearInterval(refreshTimer);
     }
+}).on("click touch", '.hide-offline-miners', function(e)
+{
+    unam_jsonAjax('POST', 'api/ajax-actions.php', { method: 'miner-offline' }, function(data){
+        reloadDatatables();
+    });
 });
 
 function datatableTemplate(table, _data={}, minmode=false, _columnDefs=[]){
@@ -148,7 +153,6 @@ function datatableTemplate(table, _data={}, minmode=false, _columnDefs=[]){
         stateDuration: 0,
         processing: true,
         serverSide: true,
-        sScrollX: "100%",
         <?php if($langID != 'en' && file_exists(__DIR__."/lang/datatables/{$langID}.json")){ echo "language: ".file_get_contents(__DIR__."/lang/datatables/{$langID}.json").","; } ?>
         ajax: {
             url: "api/custom-table.php",
@@ -157,7 +161,7 @@ function datatableTemplate(table, _data={}, minmode=false, _columnDefs=[]){
         },
         responsive: true,
         columnDefs: _columnDefs
-    };
+    }
 }
 
 function confirmationBox(code){
@@ -193,8 +197,32 @@ function errorMessage(error){
 function reloadDatatables(){
     for (let table in datatables) {
         datatables[table].ajax.reload(null, false);
-        datatables[table].responsive.recalc()
     }
+}
+
+function formatHashrate(hashrate, precision=2) {
+    let hr = parseFloat(hashrate);
+    let unit= 'H/s';
+    if(hr >= 1000) { hr /= 1000; unit= 'KH/s'; }
+    if(hr >= 1000) { hr /= 1000; unit= 'MH/s'; }
+    if(hr >= 1000) { hr /= 1000; unit= 'GH/s'; }
+    if(hr >= 1000) { hr /= 1000; unit= 'TH/s'; }
+    if(hr >= 1000) { hr /= 1000; unit= 'PH/s'; }
+    return (hr.toFixed(precision) + ' ' + unit);
+}
+
+function renderCharts() {
+    $('.hook-chart').each(function(i, obj) {
+        let scope = $(this);
+        let config = scope.data('chart-config');
+        if(config){
+            if(scope.data('chart-type') === 'hashrate') {
+                config.options.scales.y.ticks.callback = (label) => formatHashrate(label, 2);
+            }
+            new Chart(scope, config);
+            scope.removeClass('hook-chart');
+        }
+    });
 }
 
 $(document).on('submit', ".form-submit", function(e){
@@ -244,6 +272,21 @@ $(document).on('submit', ".form-submit", function(e){
         });
     }else{
         ajaxAction(scope);
+    }
+}).on('click touch', ".hashrate-history", function(e){
+    e.preventDefault();
+    let scope = $(this);
+    const index = scope.data('index');
+    if(index){
+        unam_jsonAjax('POST', 'api/ajax-actions.php', {
+            method: 'miner-history',
+            index: index
+        }, function (data) {
+            scope.parent().html(data.successmsg);
+            renderCharts();
+        }, function (error) {
+            errorMessage(error);
+        });
     }
 });
 
@@ -304,20 +347,12 @@ function loadPageContentAjax(scope, _type, _url, _data={}, _container='.ajaxcont
                   $('.hook-datatable').each(function(i, obj) {
                       let scope = $(this);
                       if(scope.data('tableid')){
-                          let editColumns = scope.data('editcolumns');
                           let columnDef = [];
-                          if(editColumns) {
-                              Object.keys(editColumns).forEach(key => {
-                                  columnDef.push({sName: editColumns[key], targets: Number(key)});
-                              });
-                          }
                           datatables[scope.data('tableid')] = $('#'+scope.data('tableid')).DataTable(datatableTemplate(scope.data('tableid'), Object.assign({}, scope.data('extradata'), scope.data('filters')), scope.data('minmode'), columnDef));
-                          if(editColumns){
-                              datatableEditable(datatables[scope.data('tableid')], Object.keys(editColumns).map(Number), (scope.data('editformat') ? scope.data('editformat') : [{}]));
-                          }
-                          datatables[scope.data('tableid')].responsive.recalc()
                       }
                   });
+
+                  renderCharts();
 
                   $('.hook-select2').each(function(i, obj) {
                       let scope = $(this);

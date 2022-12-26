@@ -14,10 +14,10 @@ function db_setFilters(&$options, $alias, $allowedfilters){
     if(!empty($filters) && is_array($filters)){
         foreach($filters as $filter=>$val){
             if(!empty($val) && in_array($filter, $allowedfilters)){
-                $options['where'][] = [
-                    'db' => $alias.$filter,
-                    'op' => '=',
-                    'value' => $val];
+                $options['db_where'][] = [
+                    'db_column' => $alias.$filter,
+                    'db_operation' => '=',
+                    'db_value' => $val];
             }
         }
     }
@@ -41,6 +41,13 @@ switch (getParam('method')) {
                 }
             }
             db_setFilters($options, ($table['db_filters_prefix'] ?? ''), [($table['db_allowed_filters'] ?? '')]);
+
+            if(getParam('tableid') === 'miner-table' && isset($_SESSION['hide_offline_miners']) && $_SESSION['hide_offline_miners'] == true) {
+                $options['db_where'][] = [
+                    'db_column' => 'ms_lastConnection',
+                    'db_operation' => '<',
+                    'db_value' => "datetime('now', '-3 minute')"];
+            }
         }
         break;
 }

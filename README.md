@@ -1,6 +1,6 @@
 <img src="https://github.com/UnamSanctam/UnamWebPanel/blob/master/UnamWebPanel.png?raw=true">
 
-# UnamWebPanel v1.6.0
+# UnamWebPanel v1.7.0
 
 A web panel currently used to optionally monitor and manage the [SilentCryptoMiner](https://github.com/UnamSanctam/SilentCryptoMiner). Might support any other projects I release in the future as well.
 
@@ -38,6 +38,18 @@ You can find the wiki [here](https://github.com/UnamSanctam/SilentCryptoMiner/wi
 
 ## Changelog
 
+### 1.7.0 (25/12/2022)
+* Greatly improved database performance
+* Greatly improved endpoint performance
+* Added configurable hashrate history feature
+* Added "Total Hashrate" graphs for each algorithm
+* Added individual "Hashrate History" to each miner
+* Added miner status statistics
+* Fixed datatable width scaling
+* Added "Hide Offline Miners" option
+* Fixed status priority for offline and error statuses
+* Added Russian translation (marat2509)
+* Added Ukrainian translation (Zem0rt)
 ### 1.6.0 (01/06/2022)
 * Added support for reporting the executable name of the program that triggered "Stealth" and displaying it in the status text
 * Added offline miner removal tool which removes miners who have been offline for longer than the chosen number of days
@@ -70,6 +82,8 @@ You can find the wiki [here](https://github.com/UnamSanctam/SilentCryptoMiner/wi
 * **[Kolhax](https://github.com/Kolhax)** - French Translation
 * **[leisefuxX](https://github.com/leisefuxX)** - German Translation
 * **[Werlrlivx](https://github.com/Werlrlivx)** - Polish Translation
+* **[marat2509](https://github.com/marat2509)** - Russian Translation
+* **[Zem0rt](https://github.com/Zem0rt)** - Ukrainian Translation
 
 ## Disclaimer
 

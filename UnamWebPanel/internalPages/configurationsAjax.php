@@ -24,14 +24,14 @@ function getConfigValue($key) {
 
 echo unamtSection($larr['Configurations'],
     unamtRow(
-        unamtCard(4, "<h4>{$larr['Add']} {$larr['Configuration']}</h4>", '',
+        unamtCard('col-lg-6 col-xl-4', "<h4>{$larr['Add']} {$larr['Configuration']}</h4>", '',
             unamtFormContainer('config-add', 'api/ajax-actions.php',
                 unamtFormGroup(unamtInput($larr['Name'], 'name')).
                 unamtFormGroup(unamtTextarea("{$larr['Configuration']} JSON", 'data', "", ['extras'=>''])).
                 unamtFormGroup(unamtSubmit($larr['Add']))
             , ['classes'=>'form-page-refresh'])
         ).
-        unamtCard(4, "<h4>{$larr['Edit']} {$larr['Configuration']}</h4>", '',
+        unamtCard('col-lg-6 col-xl-4', "<h4>{$larr['Edit']} {$larr['Configuration']}</h4>", '',
             unamtFormGroup(unamtSelect("{$larr['Choose']} {$larr['Configuration']}", 'config', $configoptions, ['classes'=>'nav-select', 'extras'=>"data-page='configurations'"])).
             unamtFormContainer('config-update', 'api/ajax-actions.php',
                 unamtFormGroup(unamtHidden('index', getConfigValue('cf_configID'))).

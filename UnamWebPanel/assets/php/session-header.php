@@ -1,6 +1,7 @@
 <?php
 /* Made by Unam Sanctam https://github.com/UnamSanctam */
 require_once dirname(__DIR__, 2).'/class/class.base.php';
+if(session_status() !== PHP_SESSION_ACTIVE) session_start();
 
 $base = new base();
 
@@ -12,7 +13,7 @@ if(!isset($_SESSION['csrf_token'])){
 }
 
 if(!isset($_SESSION['lang']) || empty($_SESSION['lang'])){
-    $_SESSION['lang'] = $base->unam_getBrowserLanguages($config['languages']);
+    $_SESSION['lang'] = $base->unam_getBrowserLanguages(array_keys($config['languages']));
 }
 
 $loggedin = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true;
