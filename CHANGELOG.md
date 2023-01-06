@@ -1,3 +1,12 @@
+### 1.7.1 (06/01/2023)
+* Moved miner statistics to a new "Statistics" page
+* Added more statistics such as GPU, CPU, Version and Algorithm graphs
+* Fixed "Hide Offline Miners" bug
+* Reworked endpoint again for better performance
+* Added inactive journal size limit and higher cache limit
+* Reduced WAL file growth and added cleaning
+* Changed SQLite synchronous mode to OFF for higher performance
+* Added Spanish translation (Xeneht)
 ### 1.7.0 (25/12/2022)
 * Greatly improved database performance
 * Greatly improved endpoint performance

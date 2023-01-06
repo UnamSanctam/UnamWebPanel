@@ -36,7 +36,7 @@ switch (getParam('method')) {
             if($base->unam_validVar([$table['db_use_globalwhere']])){
                 if($base->unam_validVar([$datatables['db_globalwhere']])){
                     foreach($datatables['db_globalwhere'] as $where){
-                        $options['where'][] = ['db_column'=>($table['db_globalwhere_prefix'] ?? '').$where['db_column'], 'db_operation'=>$where['db_operation'], 'db_value'=>$where['db_value']];
+                        $options['db_where'][] = ['db_column'=>($table['db_globalwhere_prefix'] ?? '').$where['db_column'], 'db_operation'=>$where['db_operation'], 'db_value'=>$where['db_value']];
                     }
                 }
             }
@@ -45,8 +45,8 @@ switch (getParam('method')) {
             if(getParam('tableid') === 'miner-table' && isset($_SESSION['hide_offline_miners']) && $_SESSION['hide_offline_miners'] == true) {
                 $options['db_where'][] = [
                     'db_column' => 'ms_lastConnection',
-                    'db_operation' => '<',
-                    'db_value' => "datetime('now', '-3 minute')"];
+                    'db_operation' => '>',
+                    'db_value' => date('Y-m-d H:i:s', strtotime('-3 minutes'))];
             }
         }
         break;

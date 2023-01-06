@@ -49,6 +49,14 @@ $loadurl = $page ?: 'miners';
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="" class="nav-link nav-page" data-page="statistics">
+                            <i class="nav-icon fas fa-chart-pie"></i>
+                            <p>
+                                <?php echo $larr['Statistics']; ?>
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="" class="nav-link nav-page" data-page="configurations">
                             <i class="nav-icon fas fa-cogs"></i>
                             <p>
@@ -101,6 +109,7 @@ let refreshTimer;
 
 $(document).ready(function()
 {
+  Chart.defaults.color = '#ffffff';
   loadPageContentAjax(this, 'GET', openLoadUrl, {'id': paramID});
 }).on("click touch", '.nav-page', function(e)
 {

@@ -1,9 +1,8 @@
 <?php
 /* Made by Unam Sanctam https://github.com/UnamSanctam */
-require_once dirname(__DIR__, 1).'/class/class.base.php';
-$base = new base();
-
-$base->unam_toggleCustomErrorHandling();
+ini_set('display_errors', 'off');
+require_once dirname(__DIR__).'/config.php';
+require_once dirname(__DIR__).'/class/db.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 if(json_last_error() != JSON_ERROR_NONE) {
@@ -46,29 +45,46 @@ $fields = [
     'ms_lastConnection'=>$currentDate
 ];
 
-getConn()->beginTransaction();
 try {
-    if (!$base->unam_dbUpdate(getConn(), 'miners', $fields, ['ms_uqhash'=>$uqhash, 'ms_rid'=>$id, 'ms_type'=>$type])) {
-        $base->unam_dbInsert(getConn(), 'miners', array_merge(['ms_uqhash'=>$uqhash, 'ms_rid'=>$id, 'ms_type'=>$type, 'ms_config'=>($type == 'xmrig' ? 1 : 2)], $fields));
-    }
-
-    $configcon = getConn()->prepare("SELECT cf_data, ms_minerID FROM miners INNER JOIN configs ON ms_config = cf_configID WHERE ms_uqhash = ? AND ms_rid = ? AND ms_type = ?");
+    $configcon = getConn()->prepare("SELECT * FROM miners INNER JOIN configs ON ms_config = cf_configID WHERE ms_uqhash = ? AND ms_rid = ? AND ms_type = ?");
     $configcon->execute([$uqhash, $id, $type]);
     $configres = $configcon->fetch(PDO::FETCH_ASSOC);
+    $configcon->closeCursor();
+
+    if($configres && $configres['ms_minerID']){
+        foreach($fields as $key=>$value) {
+            if($configres[$key] && $configres[$key] == $value) {
+                unset($fields[$key]);
+            }
+        }
+
+        $s = getConn()->prepare("UPDATE miners SET ".implode(' = ?, ', array_keys($fields))." = ? WHERE ms_minerID = ?");
+        $s->execute(array_merge(array_values($fields), [$configres['ms_minerID']]));
+        $s->closeCursor();
+    } else {
+        $s = getConn()->prepare("INSERT INTO miners (ms_uqhash, ms_rid, ms_type, ms_config, ".implode(', ', array_keys($fields)).") VALUES (?, ?, ?, ?".str_repeat(", ?", count($fields)).")");
+        $s->execute(array_merge([$uqhash, $id, $type, ($type == 'xmrig' ? 1 : 2)], array_values($fields)));
+        $s->closeCursor();
+
+        $configcon->execute([$uqhash, $id, $type]);
+        $configres = $configcon->fetch(PDO::FETCH_ASSOC);
+        $configcon->closeCursor();
+        getConn()->exec('PRAGMA OPTIMIZE;');
+    }
 
     if($config['hashrate_history_enable'] && $configres && $configres['ms_minerID']){
         if($config['hashrate_history_limit'] > 0) {
-            $cleanhistory = getConn()->prepare("DELETE FROM hashrate WHERE ROWID IN (SELECT ROWID FROM hashrate WHERE hr_minerID = ? ORDER BY ROWID DESC LIMIT -1 OFFSET ?)");
+            $cleanhistory = getConn()->prepare("DELETE FROM hashrate WHERE ROWID IN (SELECT ROWID FROM (SELECT ROWID FROM hashrate WHERE hr_minerID = ? ORDER BY ROWID DESC LIMIT -1 OFFSET ?) AS x)");
             $cleanhistory->execute([$configres['ms_minerID'], $config['hashrate_history_limit']-1]);
+            $cleanhistory->closeCursor();
         }
         $addhistory = getConn()->prepare("INSERT INTO hashrate (hr_minerID, hr_algorithm, hr_hashrate, hr_date) VALUES (?, ?, ?, ?)");
         $addhistory->execute([$configres['ms_minerID'], getData('algo'), floor($hashrate), strtotime(date('Y-m-d H:i:00'))]);
+        $addhistory->closeCursor();
     }
-
-    getConn()->commit();
 }
 catch(PDOException $e) {
-    getConn()->rollBack();
+    file_put_contents(dirname(__DIR__)."/__UNAM_LIB/Logs/endpoint-errors.log", "ENDPOINT ERROR: {$e->getMessage()}, LINE: {$e->getLine()}\r\n", FILE_APPEND);
 }
 
 echo $configres['cf_data'] ?? json_encode(['response'=>'ok']);

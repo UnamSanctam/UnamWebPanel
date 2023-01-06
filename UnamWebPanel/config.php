@@ -17,7 +17,7 @@ $config['password'] = 'UnamSanctam';
 $config['db_file'] = dirname(__FILE__)."/db/unamwebpanel.db";
 
 /*
- * Change to false to disable hashrate history. This option will make the
+ * Change to false to disable hashrate history. Having this option enabled will make the
  * endpoint save the hashrate of each miner connection. This history can be
  * seen on each individual miner or in the miner tab which shows the total
  * hashrate for each algorithm.
@@ -45,9 +45,10 @@ $config['languages'] = [
     'de'=>'German',
     'pl'=>'Polish',
     'ru'=>'Russian',
-    'uk'=>'Ukrainian'
+    'uk'=>'Ukrainian',
+    'es'=>'Spanish'
 ];
 
-$config['unam_version'] = "1.7.0";
+$config['unam_version'] = "1.7.1";
 
 global $config;

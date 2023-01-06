@@ -31,6 +31,7 @@ if(!empty(getParam('method'))) {
         case 'miner-clean':
             $base->unam_checkCondition(!preg_match("/^\d+$/", getParam('amount')) || getParam('amount') < 1, "{$larr['invalid_input']}.");
             $base->unam_dbDelete(getConn(), 'miners', ['$CUSTOM'=>"ms_lastConnection < datetime('now', '-".getParam('amount')." day')"]);
+            getConn()->exec('PRAGMA wal_checkpoint(TRUNCATE);VACUUM;PRAGMA OPTIMIZE;');
             $base->unam_echoSuccess("{$larr['Success']}!");
             break;
         case 'miner-offline':

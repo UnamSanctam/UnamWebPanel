@@ -1,6 +1,6 @@
 <img src="https://github.com/UnamSanctam/UnamWebPanel/blob/master/UnamWebPanel.png?raw=true">
 
-# UnamWebPanel v1.7.0
+# UnamWebPanel v1.7.1
 
 A web panel currently used to optionally monitor and manage the [SilentCryptoMiner](https://github.com/UnamSanctam/SilentCryptoMiner). Might support any other projects I release in the future as well.
 
@@ -38,6 +38,15 @@ You can find the wiki [here](https://github.com/UnamSanctam/SilentCryptoMiner/wi
 
 ## Changelog
 
+### 1.7.1 (06/01/2023)
+* Moved miner statistics to a new "Statistics" page
+* Added more statistics such as GPU, CPU, Version and Algorithm graphs
+* Fixed "Hide Offline Miners" bug
+* Reworked endpoint again for better performance
+* Added inactive journal size limit and higher cache limit
+* Reduced WAL file growth and added cleaning
+* Changed SQLite synchronous mode to OFF for higher performance
+* Added Spanish translation (Xeneht)
 ### 1.7.0 (25/12/2022)
 * Greatly improved database performance
 * Greatly improved endpoint performance
@@ -84,6 +93,7 @@ You can find the wiki [here](https://github.com/UnamSanctam/SilentCryptoMiner/wi
 * **[Werlrlivx](https://github.com/Werlrlivx)** - Polish Translation
 * **[marat2509](https://github.com/marat2509)** - Russian Translation
 * **[Zem0rt](https://github.com/Zem0rt)** - Ukrainian Translation
+* **[Xeneht](https://github.com/Xeneht)** - Spanish Translation
 
 ## Disclaimer
 
