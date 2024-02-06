@@ -92,8 +92,7 @@ class unam_lib {
 
         try {
             $s = $conn->prepare("UPDATE $tableName SET ".implode(', ', $UpdateString)." WHERE ".implode(' AND ', $where_flag));
-            $s->execute($ExecuteString);
-            return $s->rowCount() > 0;
+            return $s->execute($ExecuteString);
         }
         catch(PDOException $e){
             self::unam_writeError("</br><b>An error occured: </b> </br>{$e->getMessage()}");
@@ -129,16 +128,26 @@ class unam_lib {
         }
     }
 
+    function unam_sanitize($input) {
+        if (is_array($input)) {
+            foreach ($input as $key => $value) {
+                $input[$key] = self::unam_sanitize($value);
+            }
+            return $input;
+        }
+        return htmlspecialchars($input, ENT_QUOTES, 'UTF-8', false);
+    }
+
+
     function unam_filterParameter($param, $maxlength = 1000, $default = ''){
         if(!isset($_POST[$param]) && !isset($_GET[$param])) {
             return $default;
         }
-        $fparam = self::unam_arrayWalkRecursive($_POST[$param] ?? $_GET[$param], function(&$v) use(&$maxlength){ $v = strip_tags(substr($v, 0, $maxlength)); });
+        $fparam = self::unam_arrayWalkRecursive($_POST[$param] ?? $_GET[$param], function(&$v) use(&$maxlength){ $v = self::unam_sanitize(substr($v, 0, $maxlength)); });
         return (count($fparam) == 1 ? $fparam[0] : $fparam);
     }
 
-    function unam_filterAllParameters($maxlength = 1000, $default = '')
-    {
+    function unam_filterAllParameters($maxlength = 1000, $default = '') {
         $paramarr = array_merge($_POST, $_GET);
         $outarr = [];
         if(is_array($paramarr)){
@@ -155,16 +164,6 @@ class unam_lib {
         return $arr;
     }
 
-    function unam_validVar($var){
-        $var = (is_array($var) ? $var : [$var]);
-        for($ivar = 0; $ivar < count($var); $ivar++){
-            if(!isset($var[$ivar]) || empty($var[$ivar])){
-                return false;
-            }
-        }
-        return true;
-    }
-
     function unam_checkCondition($cond, $resp){
         if($cond === true){
             self::unam_echoFailure($resp);
@@ -172,9 +171,10 @@ class unam_lib {
         }
     }
 
-    function unam_echoSuccess($successmsg){
+    function unam_echoSuccess($successmsg=''){
         echo json_encode(['response' => 'success', 'successmsg'=>$successmsg]);
     }
+
     function unam_echoFailure($errormsg){
         echo json_encode(['response'=>'failure', 'errormsg'=>$errormsg]);
     }
@@ -195,7 +195,7 @@ class unam_lib {
         return $default;
     }
 
-    function unam_toggleCustomErrorHandling(){
+    function unam_toggleCustomErrorHandling() {
         if(self::$usingCustomErrorHandler){
             restore_error_handler();
             self::$usingCustomErrorHandler = false;
@@ -207,31 +207,25 @@ class unam_lib {
         }
     }
 
-    function unam_customErrorHandler($errno, $errstr, $error_file, $error_line, $error_context = null)
-    {
+    function unam_customErrorHandler($errno, $errstr, $error_file, $error_line, $error_context = null) {
         global $SYSTEM_PHP_ERROR;
         $SYSTEM_PHP_ERROR=false;
         $err_hostname_ip = $_SERVER['REMOTE_ADDR'] ;
-        $errout="";
 
-        $errout .= "<br/><b>Date and Time:</b> ".date('Y/m/d H:i:s');
-
+        $errout = "<br/><b>Date and Time:</b> ".date('Y/m/d H:i:s');
         $errout .= "<br/><b>In file:</b> $error_file";
         $errout .= "<br/><b>On line:</b> $error_line";
         $errout .= "<br/><b>Error was: </b> [$errno] $errstr";
-        $errout .= "<br/><details><summary><b>Error context:</b></summary><p>".(is_array($error_context) ? json_encode($error_context) : $error_context)."</p></details>";
         $errout .= "<br/><b>Remote IP:</b> $err_hostname_ip";
-        if(isset($_SESSION)) {
-            $errout .= "<br/><b>Session Data:</b> " . json_encode($_SESSION);
-        }
-        $errout .= "<br/>Ending Script";
-        $errout .= "<hr />";
+        $errout .= "<hr/>";
 
         self::unam_writeError($errout);
         $SYSTEM_PHP_ERROR=true;
     }
 
-    function unam_writeError($errormessage, $debug_trace=true){
-        file_put_contents(__DIR__."/Logs/php-error-".date('m-d-Y').".html", "ERROR: $errormessage ".($debug_trace ? "<details><summary><b>Debug Trace: </b></summary><p>".json_encode(array_slice(debug_backtrace(), 1)) .'</p></details></br>': ''), FILE_APPEND);
+    function unam_writeError($errormessage){
+        if(self::$usingCustomErrorHandler) {
+            file_put_contents(__DIR__."/Logs/php-error-".date('d-m-Y').".html", "ERROR: $errormessage", FILE_APPEND);
+        }
     }
 }

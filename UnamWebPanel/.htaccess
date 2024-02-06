@@ -1,5 +1,10 @@
+AddDefaultCharset UTF-8
 DirectoryIndex index.php
+Options -Indexes
 <FilesMatch "unamwebpanel\.db">  
   Require all denied
 </FilesMatch>
-Options -Indexes
+<IfModule mod_headers.c>
+    Header always unset X-Robots-Tag
+    Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>

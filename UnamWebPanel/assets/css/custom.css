@@ -1,20 +1,27 @@
 /**
- *
- * You can write your CSS code here, DO NOT touch the default JavaScript file
- * because it will make it harder for you to update.
- * 
+ * You can write your CSS code here.
  */
 
 /*# sourceMappingURL=custom.css.map */
 
 @font-face {
     font-family: 'Source Sans Pro';
-    src: url('/assets/fonts/SourceSansPro-Regular.ttf') format('tff');
+    src: url('../fonts/sourcesanspro-regular-webfont.woff2') format('woff2');
 }
 
-.custom-tables .dataTables_length, .custom-tables .dt-buttons{
-     float: left;
-     margin-right: 10px;
+.dataTables_length {
+    display: inline-block;
+}
+
+@media (min-width: 766px) {
+    .dataTables_length {
+        margin-left: 10px;
+    }
+}
+
+.dataTables_filter {
+    display: inline-block;
+    float: right;
 }
 
 .custom-tables tbody{
@@ -37,72 +44,6 @@
     width: 100% !important;
 }
 
-.select2 {
-    width:100% !important;
-}
-
-.margin-top{
-    margin-top:5px;
-}
-
-/** START LOADING SPINNER **/
-.lds-ellipsis {
-    position: relative;
-    width: 80px;
-    height: 80px;
-    margin: auto;
-}
-.lds-ellipsis div {
-    position: absolute;
-    top: 33px;
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    background: #fff;
-    animation-timing-function: cubic-bezier(0, 1, 1, 0);
-}
-.lds-ellipsis div:nth-child(1) {
-    left: 8px;
-    animation: lds-ellipsis1 0.6s infinite;
-}
-.lds-ellipsis div:nth-child(2) {
-    left: 8px;
-    animation: lds-ellipsis2 0.6s infinite;
-}
-.lds-ellipsis div:nth-child(3) {
-    left: 32px;
-    animation: lds-ellipsis2 0.6s infinite;
-}
-.lds-ellipsis div:nth-child(4) {
-    left: 56px;
-    animation: lds-ellipsis3 0.6s infinite;
-}
-@keyframes lds-ellipsis1 {
-    0% {
-        transform: scale(0);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-@keyframes lds-ellipsis3 {
-    0% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(0);
-    }
-}
-@keyframes lds-ellipsis2 {
-    0% {
-        transform: translate(0, 0);
-    }
-    100% {
-        transform: translate(24px, 0);
-    }
-}
-/** END LOADING SPINNER **/
-
 .display-inline{
     display: inline;
 }
@@ -118,13 +59,14 @@
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
-    height: 100vh;
+    height: calc(100vh - 38px);
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center;
 }
 
 .external-page-box {
+    margin-top: 38px;
     width: 320px;
 }
 
@@ -274,4 +216,38 @@ input:checked + .round-slider:before {
 .statistic-cards {
     font-size: 1.2rem;
     font-weight: 600;
+}
+
+table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before,table.dataTable.dtr-inline.collapsed>tbody>tr>th.dtr-control:before {
+    font-family: "Font Awesome 5 Free", sans-serif;
+    font-weight: 900;
+    content: "\f067";
+    color: #3f6791;
+}
+
+table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td.dtr-control:before,table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th.dtr-control:before {
+    font-family: "Font Awesome 5 Free", sans-serif;
+    font-weight: 900;
+    content: "\f068";
+    color: #3f6791;
+}
+
+.chart-miners {
+    min-height: 600px;
+}
+
+.jconfirm-content, .jconfirm-title {
+    color: #000000;
+}
+
+.btn-black {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+.btn-black:hover {
+    background-color: #000000;
+    border-color: #000000;
+    color: #eeeeee;
 }

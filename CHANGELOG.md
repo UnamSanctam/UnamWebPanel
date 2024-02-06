@@ -1,3 +1,27 @@
+### 1.8.0 (06/02/2024)
+* Rewrote almost all the code of the web panel to make it easier for others to edit
+* Added new functionality called IP Blocking with its own page that allows blocking IP addresses from connecting to the web panel
+* Added constant verification of the hashed password during login sessions, ensuring that any change to the password results in all users being logged out
+* Added an error log option to the config for enabling or disabling error logging
+* Changed the error logging function to only log vital error information
+* Rewrote datatables server side class to be shorter, more optimized and safer
+* Added further XSS mitigation to both the endpoint, the pages, the APIs and the datatable server side output
+* Added many strict headers that improve browser security
+* Added meta tags and headers alongside the current robots.txt to further discourage search engine indexing
+* Added line graph showing the total amount of online miners over time based on hashrate history reporting
+* Added pie graph showing the amount of GPU Miners and CPU Miners
+* Added pie graph showing the statuses of the miners
+* Remade some of the statistics to have better clarity
+* Added automatic SQLite database and database folder permissions checks that will display an error if they do not have the required permissions
+* Merged and removed many unused or unnecessary assets
+* Replaced SweetAlert2 with another plugin due to its malicious behaviour on .ru, .su, .by and .рф domains
+* Changed miner types to the more clear CPU Miner and GPU Miner types
+* Added new miner datatable field called Extra Data that will receive data such as resource reporting in future miner versions
+* Added logout button to the top navigation menu
+* Added all missing translations for all supported languages
+* Added language selection to the login page
+* Changed the terminology from Active to Mining
+* Improved the miner endpoint performance
 ### 1.7.1 (06/01/2023)
 * Moved miner statistics to a new "Statistics" page
 * Added more statistics such as GPU, CPU, Version and Algorithm graphs

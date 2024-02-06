@@ -1,22 +1,22 @@
 <img src="https://github.com/UnamSanctam/UnamWebPanel/blob/master/UnamWebPanel.png?raw=true">
 
-# UnamWebPanel v1.7.1
+# UnamWebPanel v1.8.0
 
 A web panel currently used to optionally monitor and manage the [SilentCryptoMiner](https://github.com/UnamSanctam/SilentCryptoMiner). Might support any other projects I release in the future as well.
 
 ## Setup
 
-The panel is quite easy to set up, the only real requirement is a  web server with PHP support. You can either host it yourself using Apache or something similar, or you can use any free or paid online webhost. Nearly all webhosts has PHP support so it should not be difficult to find one you can use.
+The panel is quite easy to set up, the only real requirement is a  web server with PHP support. You can either host it yourself using Apache or something similar, or you can use any free or paid online webhost.
 
 Here are some simple steps to get started:
-1. Download the panel files and open the UnamWebPane\config.php file with a text editor.
-2. Change the `$config['password'] = 'UnamSanctam';` (change `UnamSanctam` to your own password) to whatever password you wish to use, this is the password used to access the web panel.
+1. Download the panel files and open the UnamWebPanel/config.php file with a text editor.
+2. Change the password  at`$config['password'] = 'UnamSanctam';` to whatever password you wish to use (only change the `UnamSanctam` text to your own password), this is the password used to access the web panel.
 3. Upload the contents of the UnamWebPanel folder to your webhosts "public_html" folder or the respective folder for your specific webhost.
 4. Your web panel should now be up and running, you can browse to the URL or IP of your website and you should see the login screen if everything went correctly.
 
 If you wish to add the web panel to the SilentCryptoMiner then enter the following website URL: `http://yourwebsite.com/api/endpoint.php` (replace yourwebsite.com with your URL or IP, also make sure to use the correct `http` or `https` protocol depending on if your site has SSL "support" or not) into the `API Endpoint URL` field inside the miner.
 
-If you use something other than Apache or IIS to host the web panel then you should check if your database file is exposed to the internet, you can check it by visting the URL `http://yourwebsite.com/unamwebpanel.db` (replace yourwebsite.com with your URL or IP), if it says forbidden or doesn't display anything then your database is secured.
+If you use something other than Apache or IIS to host the web panel then you should check if your database file is exposed to the internet, you can check it by visting the URL `http://yourwebsite.com/db/unamwebpanel.db` (replace yourwebsite.com with your URL or IP), if it says forbidden or doesn't display anything then your database is secured.
 
 ### For local testing
 
@@ -28,16 +28,36 @@ If you simply want to set up a local web panel for testing then here are some si
 
 Then if you want any local miners on your computer to connect to it then enter http://localhost/api/endpoint.php into the "API Endpoint URL" of the miners in the miner builder.
 
-## Wiki
-
-You can find the wiki [here](https://github.com/UnamSanctam/SilentCryptoMiner/wiki) or at the top of the page. (In progress)
-
 ## Supported Projects
 
 * [SilentCryptoMiner](https://github.com/UnamSanctam/SilentCryptoMiner)
 
 ## Changelog
 
+### 1.8.0 (06/02/2024)
+* Rewrote almost all the code of the web panel to make it easier for others to edit
+* Added new functionality called IP Blocking with its own page that allows blocking IP addresses from connecting to the web panel
+* Added constant verification of the hashed password during login sessions, ensuring that any change to the password results in all users being logged out
+* Added an error log option to the config for enabling or disabling error logging
+* Changed the error logging function to only log vital error information
+* Rewrote datatables server side class to be shorter, more optimized and safer
+* Added further XSS mitigation to both the endpoint, the pages, the APIs and the datatable server side output
+* Added many strict headers that improve browser security
+* Added meta tags and headers alongside the current robots.txt to further discourage search engine indexing
+* Added line graph showing the total amount of online miners over time based on hashrate history reporting
+* Added pie graph showing the amount of GPU Miners and CPU Miners
+* Added pie graph showing the statuses of the miners
+* Remade some of the statistics to have better clarity
+* Added automatic SQLite database and database folder permissions checks that will display an error if they do not have the required permissions
+* Merged and removed many unused or unnecessary assets
+* Replaced SweetAlert2 with another plugin due to its malicious behaviour on .ru, .su, .by and .рф domains
+* Changed miner types to the more clear CPU Miner and GPU Miner types
+* Added new miner datatable field called Extra Data that will receive data such as resource reporting in future miner versions
+* Added logout button to the top navigation menu
+* Added all missing translations for all supported languages
+* Added language selection to the login page
+* Changed the terminology from Active to Mining
+* Improved the miner endpoint performance
 ### 1.7.1 (06/01/2023)
 * Moved miner statistics to a new "Statistics" page
 * Added more statistics such as GPU, CPU, Version and Algorithm graphs
@@ -59,26 +79,6 @@ You can find the wiki [here](https://github.com/UnamSanctam/SilentCryptoMiner/wi
 * Fixed status priority for offline and error statuses
 * Added Russian translation (marat2509)
 * Added Ukrainian translation (Zem0rt)
-### 1.6.0 (01/06/2022)
-* Added support for reporting the executable name of the program that triggered "Stealth" and displaying it in the status text
-* Added offline miner removal tool which removes miners who have been offline for longer than the chosen number of days
-* Added support for new miner ID per build to allow for running multiple miners of the same type at the same time
-* Added Polish translation (Werlrlivx)
-* Changed database settings to allow for better performance during large amounts of activity
-* Changed offline status time threshold from five minutes to three minutes
-* Changed endpoint text when the request isn't from the miner to reduce confusion
-* Changed string sanitation away from FILTER_SANITIZE_STRING due to PHP 8.1 deprication
-* Moved database to its own folder to allow for broader database file blocks
-### 1.5.0 (01/05/2022)
-* Added new field "Version" that shows the miner version
-* Added new field "Active Window" that shows the currently active foreground windows title
-* Added new field "Run Time" that shows how long the current session of the miner has been running for
-* Added "First Connection" field that shows the date and time when the miner first connected
-* Added new miner statuses "Starting" and "Error"
-* Added text next to the "Offline" status that shows how long the miner has been offline
-* Added error text when an XMR miner cannot connect to its pool
-* Added German and French datatable translation files
-* Fixed miner table ordering
 
 [You can view the full Changelog here](CHANGELOG.md)
 

@@ -6,4 +6,5 @@
     Order Allow,Deny
     Deny from all
 </IfModule>
+
 Options -Indexes
